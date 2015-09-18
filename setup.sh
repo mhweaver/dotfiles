@@ -27,3 +27,9 @@ link_config $FISH_DIR $FISH_CONFIG_DIR
 POWERLINE_DIR=$(pwd)/powerline
 POWERLINE_CONFIG_DIR=~/.config/powerline
 link_config $POWERLINE_DIR $POWERLINE_CONFIG_DIR
+
+# Link tmux config
+TMUX_CONFIG=$(pwd)/tmux.conf
+TMUX_CONFIG_DIR=~
+rm -f ${TMUX_CONFIG_DIR}/.tmux.conf
+ln -s $TMUX_CONFIG $TMUX_CONFIG_DIR/.tmux.conf
