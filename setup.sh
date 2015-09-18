@@ -22,3 +22,8 @@ function link_config {
 FISH_DIR=$(pwd)/fish
 FISH_CONFIG_DIR=~/.config/fish
 link_config $FISH_DIR $FISH_CONFIG_DIR
+
+# Link powerline config
+POWERLINE_DIR=$(pwd)/powerline
+POWERLINE_CONFIG_DIR=~/.config/powerline
+link_config $POWERLINE_DIR $POWERLINE_CONFIG_DIR
