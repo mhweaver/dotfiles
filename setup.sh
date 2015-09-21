@@ -43,7 +43,7 @@ link_config $TMUXINATOR_CONFIG $TMUXINATOR_CONFIG_DIR
 VIM_RC=$(pwd)/vim/vimrc
 GVIM_RC=$(pwd)/vim/gvimrc
 VIM_RC_DIR=~
-rm -f $VIM_RC_VIM/.vimrc
-rm -f $VIM_RC_VIM/.gvimrc
+rm -f $VIM_RC_DIR/.vimrc
+rm -f $VIM_RC_DIR/.gvimrc
 ln -s $VIM_RC $VIM_RC_DIR/.vimrc 
 ln -s $GVIM_RC $VIM_RC_DIR/.gvimrc 
