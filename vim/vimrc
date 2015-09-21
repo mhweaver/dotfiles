@@ -1,4 +1,4 @@
-"general code formating options
+"General code formating options
 set linebreak
 set nu
 set noexpandtab
@@ -10,12 +10,20 @@ set hlsearch
 set incsearch
 
 
-" Make command line two lines high
+"Make command line two lines high
 set ch=2
-" Hide the mouse when typing text
+"Hide the mouse when typing text
 set mousehide
 
 "Set up relative line numbers"
 "set number relativenumber"
 "autocmd InsertEnter * :set number norelativenumber"
 "autocmd InsertLeave * :set number relativenumber"
+
+"Enable powerline
+set laststatus=2
+set t_Co=256
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
