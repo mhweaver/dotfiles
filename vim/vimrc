@@ -1,0 +1,21 @@
+"general code formating options
+set linebreak
+set nu
+set noexpandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+set hlsearch
+set incsearch
+
+
+" Make command line two lines high
+set ch=2
+" Hide the mouse when typing text
+set mousehide
+
+"Set up relative line numbers"
+"set number relativenumber"
+"autocmd InsertEnter * :set number norelativenumber"
+"autocmd InsertLeave * :set number relativenumber"

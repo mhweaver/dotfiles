@@ -38,3 +38,12 @@ ln -s $TMUX_CONFIG $TMUX_CONFIG_DIR/.tmux.conf
 TMUXINATOR_CONFIG=$(pwd)/tmuxinator
 TMUXINATOR_CONFIG_DIR=~/.tmuxinator
 link_config $TMUXINATOR_CONFIG $TMUXINATOR_CONFIG_DIR
+
+# Link vim configs
+VIM_RC=$(pwd)/vim/vimrc
+GVIM_RC=$(pwd)/vim/gvimrc
+VIM_RC_DIR=~
+rm -f $VIM_RC_VIM/.vimrc
+rm -f $VIM_RC_VIM/.gvimrc
+ln -s $VIM_RC $VIM_RC_DIR/.vimrc 
+ln -s $GVIM_RC $VIM_RC_DIR/.gvimrc 
