@@ -9,6 +9,8 @@ set autoindent
 set hlsearch
 set incsearch
 
+"Enable syntax hightlighting
+syntax on
 
 "Make command line two lines high
 set ch=2
