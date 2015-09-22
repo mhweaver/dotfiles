@@ -25,8 +25,9 @@ set mousehide
 "autocmd InsertLeave * :set number relativenumber"
 
 "Enable powerline
-set laststatus=2
-set t_Co=256
+set laststatus=2 "Needed to show the status line
+set showtabline=2 "Needed to show the tabline
+set t_Co=256 "Colors!
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
