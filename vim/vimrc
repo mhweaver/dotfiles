@@ -28,7 +28,7 @@ set mousehide
 set laststatus=2 "Needed to show the status line
 set showtabline=2 "Needed to show the tabline
 set t_Co=256 "Colors!
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-"set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+set rtp+=~/configs/.extern/powerline/powerline/bindings/vim
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
