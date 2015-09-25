@@ -78,17 +78,17 @@
 		},
 		"v": {
 			"groups": {
-				"mode": { "fg": "darkorange", "bg": "brightestorange", "attrs": ["bold"] }
+				"mode": { "fg": "white", "bg": "brightestorange", "attrs": ["bold"] }
 			}
 		},
 		"V": {
 			"groups": {
-				"mode": { "fg": "darkorange", "bg": "brightestorange", "attrs": ["bold"] }
+				"mode": { "fg": "white", "bg": "brightestorange", "attrs": ["bold"] }
 			}
 		},
 		"^V": {
 			"groups": {
-				"mode": { "fg": "darkorange", "bg": "brightestorange", "attrs": ["bold"] }
+				"mode": { "fg": "white", "bg": "brightestorange", "attrs": ["bold"] }
 			}
 		},
 		"R": {
