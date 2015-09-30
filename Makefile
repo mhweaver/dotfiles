@@ -1,15 +1,20 @@
-all: fish powerline tmux vim
+all: install link
 
-fish: FORCE
+link: link-fish link-powerline link-tmux link-vim
+
+install: FORCE
+	./install.sh
+
+link-fish: FORCE
 	./link-fish.sh
 
-powerline: FORCE
+link-powerline: FORCE
 	./link-powerline.sh
 
-tmux: FORCE
+link-tmux: FORCE
 	./link-tmux.sh
 
-vim: FORCE
+link-vim: FORCE
 	./link-vim.sh
 
 FORCE:
