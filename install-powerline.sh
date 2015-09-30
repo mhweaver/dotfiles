@@ -1,14 +1,10 @@
 #!/bin/bash
 
-POWERLINE_VERSION=2.2
+source install-common.sh
 
-if [ -e .extern ]; then
-	rm -rf .extern
-fi
-mkdir .extern
+POWERLINE_VERSION=2.2
 cd .extern
 
 git clone --branch $POWERLINE_VERSION https://github.com/powerline/powerline
 cd powerline
 python setup.py build
-

@@ -2,8 +2,10 @@ all: install link
 
 link: link-fish link-powerline link-tmux link-vim
 
-install: FORCE
-	./install.sh
+install: install-powerline
+
+install-powerline: FORCE
+	./install-powerline.sh
 
 link-fish: FORCE
 	./link-fish.sh
