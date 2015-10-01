@@ -1,3 +1,10 @@
+call plug#begin()
+
+Plug 'sjl/gundo.vim'
+
+call plug#end()
+
+
 "General code formating options
 set linebreak
 set nu
@@ -32,3 +39,16 @@ set rtp+=~/dotfiles/.extern/powerline/powerline/bindings/vim
 "python from powerline.vim import setup as powerline_setup
 "python powerline_setup()
 "python del powerline_setup
+
+"Post plugin initialization stuff
+function! OnEnter()
+"Gundo
+	if exists(':GundoToggle')
+		nnoremap <F5> :GundoToggle<CR>
+	else
+		echo 'Gundo is not installed (you might need to do :PlugInstall)'
+	endif
+endfunction
+
+
+autocmd VimEnter * :call OnEnter()
