@@ -1,0 +1,52 @@
+# ~/.tmuxinator/default.yml
+
+name: default
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+windows:
+  - main:
+          layout: 4f48,142x39,0,0{86x39,0,0,1,55x39,87,0,5}
+          panes:
+                -
+                -
+  - code:
+          layout: 4f48,142x39,0,0{86x39,0,0,1,55x39,87,0,5}
+          panes:
+                - cd ~/code
+                - cd ~/code
+  - aux:
+        layout: main-vertical
+        panes:
+                -
+                -
+  - tools:
+        layout: main-vertical
+        panes:
+                -
+                - ~/0xDBE-142.3925.2/bin/0xdbe.sh
+                - java -jar ~/code/Beta-Sql/target/beta-db-1.0-SNAPSHOT-jar-with-dependencies.jar
+                - ~/tiresias/accounting2/run-Tiresias.sh
+                - ~/idea-IU-141.1532.4/bin/idea.sh
+  - dual-build:
+        layout: even-horizontal
+        panes:
+                - cd ~/code
+                - cd ~/code
