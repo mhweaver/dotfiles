@@ -377,16 +377,37 @@ awful.rules.rules = {
 	{ rule = { class = "Gnome-terminal" },
 	  -- properties = { tag = tags[1][2] }
 	  callback = function(c) 
-		  c:tags({tags[1][2], tags[2][2], tags[2][1]}) 
+		  c:tags({tags[2][2], tags[1][2], tags[1][1]}) 
 	  end 
 	},
 	{ rule = { class = "xterm-256color" }, -- This is st. I had to change the classname to xterm-256color to make fish happy
 	  -- properties = { tag = tags[1][2] }
 	  callback = function(c) 
-		  c:tags({tags[1][2], tags[2][2], tags[2][1]}) 
+		  c:tags({tags[2][2], tags[1][2], tags[1][1]}) 
 	  end,
 	  properties = { opacity = 0.9 }
 	},
+	{ rule = { class = "Pidgin", name = "Buddy List" }, -- Send the buddy list to the comm tag
+		properties = { tag = tags[1][3] }
+	},
+	{ rule = { class = "Pidgin" }, -- Send all other Pidgin windows to the main and comm tags
+		callback = function(c)
+			if c.name ~= "Buddy List" then
+				c:tags({tags[1][1], tags[1][3]})
+			end
+		end
+	},
+	{ rule = { class = "Firefox" },
+		callback = function(c)
+			c:tags({tags[1][1], tags[1][3]})
+		end
+	},
+	{ rule = { class = "Google-chrome" },
+		callback = function(c)
+			c:tags({tags[1][1], tags[1][3]})
+		end
+	},
+
 }
 -- }}}
 
