@@ -1,4 +1,6 @@
-set -x TERM xterm-256color
+if [ ! (echo $TERM | grep "256color\$") ]
+	set -x TERM xterm-256color
+end
 set -x EDITOR /usr/bin/vim
 set -x SHELL /usr/bin/fish
 # set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
