@@ -35,7 +35,10 @@ do
 end
 -- }}}
 
-awful.util.spawn_with_shell("xcompmgr -cF &")
+-- Enable compositing
+--awful.util.spawn_with_shell("xcompmgr -cF &")
+awful.util.spawn_with_shell("killall unagi; unagi &")
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
