@@ -398,9 +398,7 @@ awful.rules.rules = {
 		end
 	},
 	{ rule = { class = "Firefox" },
-		callback = function(c)
-			c:tags({tags[1][1], tags[1][3]})
-		end
+		properties = { tag = tags[1][3]  }
 	},
 	{ rule = { class = "Google-chrome" },
 		callback = function(c)
