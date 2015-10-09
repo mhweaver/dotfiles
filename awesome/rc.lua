@@ -83,9 +83,9 @@ tags = {
 		4, 5, 6, 7, 8, 9
 	},
 	layout = {
-		layouts[1], 
-		layouts[1], 
-		layouts[1],
+		layouts[2], 
+		layouts[2], 
+		layouts[2],
 		layouts[1],
 		layouts[1],
 		layouts[1],
@@ -97,7 +97,7 @@ tags = {
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     --tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-    tags[s] = awful.tag(tags.names, s, layouts[1])
+    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
 -- }}}
 
@@ -305,7 +305,11 @@ clientkeys = awful.util.table.join(
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
-        end)
+        end),
+	awful.key({ modkey,			  }, "b",
+		function (c)
+			c:raise()
+		end)
 )
 
 -- Compute the maximum number of digit we need, limited to 9
@@ -377,13 +381,13 @@ awful.rules.rules = {
 	{ rule = { class = "Gnome-terminal" },
 	  -- properties = { tag = tags[1][2] }
 	  callback = function(c) 
-		  c:tags({tags[2][2], tags[1][2], tags[1][1]}) 
+		  c:tags({tags[2][2], tags[1][2]}) 
 	  end 
 	},
-	{ rule = { class = "xterm-256color" }, -- This is st. I had to change the classname to xterm-256color to make fish happy
+	{ rule = { class = "stterm-256color" }, -- This is st. I had to change the classname to xterm-256color to make fish happy
 	  -- properties = { tag = tags[1][2] }
 	  callback = function(c) 
-		  c:tags({tags[2][2], tags[1][2], tags[1][1]}) 
+		  c:tags({tags[2][2], tags[1][2]}) 
 	  end,
 	  properties = { opacity = 0.9 }
 	},
@@ -401,6 +405,11 @@ awful.rules.rules = {
 		properties = { tag = tags[1][3]  }
 	},
 	{ rule = { class = "Google-chrome" },
+		callback = function(c)
+			c:tags({tags[1][1], tags[1][3]})
+		end
+	},
+	{ rule = { class = "Thunderbird" },
 		callback = function(c)
 			c:tags({tags[1][1], tags[1][3]})
 		end

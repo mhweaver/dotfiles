@@ -3,6 +3,7 @@ if [ ! (echo $TERM | grep "256color\$") ]
 end
 set -x EDITOR /usr/bin/vim
 set -x SHELL /usr/bin/fish
+tput smkx
 # set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
 set -x PATH ~/dotfiles/.extern/powerline/scripts $PATH
 set -x PYTHONPATH ~/dotfiles/.extern/powerline/:$PYTHONPATH
