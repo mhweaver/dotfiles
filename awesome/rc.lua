@@ -39,6 +39,12 @@ end
 --awful.util.spawn_with_shell("xcompmgr -cF &")
 awful.util.spawn_with_shell("killall unagi; unagi &")
 
+
+addTag = function(c, tag)
+	return awful.util.table.join(c.tags(), {tag})
+end
+
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
@@ -290,6 +296,11 @@ clientkeys = awful.util.table.join(
 	end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey, "Shift" }, "Return", function (c) 
+		c = awful.client.getmaster()
+		client.focus = c
+		c:raise()
+	end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
@@ -381,7 +392,7 @@ awful.rules.rules = {
 	{ rule = { class = "Gnome-terminal" },
 	  -- properties = { tag = tags[1][2] }
 	  callback = function(c) 
-		  c:tags({tags[2][2], tags[1][2]}) 
+		c:tags({tags[2][2], tags[1][2]}) 
 	  end 
 	},
 	{ rule = { class = "stterm-256color" }, -- This is st. I had to change the classname to xterm-256color to make fish happy
