@@ -149,12 +149,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+		workspace_buttons yes
 		tray_output primary
+		font pango:DejaVu Sans Mono for Powerline 9
 }
 
 bindsym $mod+Control+Right move workspace to output right
 bindsym $mod+Control+Left move workspace to output left
 bindsym $mod+Control+s exec i3lock -c 333333
+bindsym $mod+Control+l exec i3lock -c 333333
 bindsym $mod+Control+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Control+minus move scratchpad
 bindsym $mod+Control+plus scratchpad show
