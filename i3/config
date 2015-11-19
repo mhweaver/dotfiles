@@ -156,8 +156,10 @@ bar {
 
 bindsym $mod+Control+Right move workspace to output right
 bindsym $mod+Control+Left move workspace to output left
-bindsym $mod+Control+s exec i3lock -c 333333
-bindsym $mod+Control+l exec i3lock -c 333333
+#bindsym $mod+Control+s exec i3lock -c 333333
+#bindsym $mod+Control+l exec i3lock -c 333333
+bindsym $mod+Control+s exec lock
+bindsym $mod+Control+l exec lock
 bindsym $mod+Control+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Control+minus move scratchpad
 bindsym $mod+Control+plus scratchpad show
