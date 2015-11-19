@@ -167,3 +167,7 @@ bindsym $mod+Control+plus scratchpad show
 focus_follows_mouse off
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 1000 ms
+
+# Lock the screen after 15 minutes
+exec xautolock -time 15 -locker '~/bin/lock' &
+
