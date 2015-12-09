@@ -4,6 +4,17 @@ end
 set -x EDITOR /usr/bin/vim
 set -x SHELL /usr/bin/fish
 tput smkx
+switch $TERM
+    case 'st-*' # suckless' simple terminal
+                # Enable keypad, do it once before fish_postexec ever fires
+        tput smkx
+        function st_smkx --on-event fish_postexec
+            tput smkx
+        end
+        function st_rmkx --on-event fish_preexec
+            tput rmkx
+        end
+end
 # set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
 set -x PATH ~/dotfiles/.extern/powerline/scripts $PATH
 set -x PYTHONPATH ~/dotfiles/.extern/powerline/:$PYTHONPATH
