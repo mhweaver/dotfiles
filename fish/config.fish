@@ -3,17 +3,13 @@ if [ ! (echo $TERM | grep "256color\$") ]
 end
 set -x EDITOR /usr/bin/vim
 set -x SHELL /usr/bin/fish
-tput smkx
-switch $TERM
-    case 'st-*' # suckless' simple terminal
-                # Enable keypad, do it once before fish_postexec ever fires
-        tput smkx
-        function st_smkx --on-event fish_postexec
-            tput smkx
-        end
-        function st_rmkx --on-event fish_preexec
-            tput rmkx
-        end
+tput smkx ^/dev/null
+function fish_enable_keypad_transmit --on-event fish_postexec
+    tput smkx ^/dev/null
+end
+
+function fish_disable_keypad_transmit --on-event fish_preexec
+    tput rmkx ^/dev/null
 end
 # set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
 set -x PATH ~/dotfiles/.extern/powerline/scripts $PATH
