@@ -88,29 +88,41 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Set workspace names
+set $workspace1Name 1: main
+set $workspace2Name 2: ide
+set $workspace3Name 3: term
+set $workspace4Name 4: comm
+set $workspace5Name 5: rdp
+set $workspace6Name 6
+set $workspace7Name 7
+set $workspace8Name 8
+set $workspace9Name 9
+set $workspace10Name 10
+
 # switch to workspace
-bindsym $mod+1 workspace 1: main
-bindsym $mod+2 workspace 2: ide
-bindsym $mod+3 workspace 3: term
-bindsym $mod+4 workspace 4: comm
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $workspace1Name
+bindsym $mod+2 workspace $workspace2Name
+bindsym $mod+3 workspace $workspace3Name
+bindsym $mod+4 workspace $workspace4Name
+bindsym $mod+5 workspace $workspace5Name
+bindsym $mod+6 workspace $workspace6Name
+bindsym $mod+7 workspace $workspace7Name
+bindsym $mod+8 workspace $workspace8Name
+bindsym $mod+9 workspace $workspace9Name
+bindsym $mod+0 workspace $workspace10Name
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1: main
-bindsym $mod+Shift+2 move container to workspace 2: ide
-bindsym $mod+Shift+3 move container to workspace 3: term
-bindsym $mod+Shift+4 move container to workspace 4: comm
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $workspace1Name
+bindsym $mod+Shift+2 move container to workspace $workspace2Name
+bindsym $mod+Shift+3 move container to workspace $workspace3Name
+bindsym $mod+Shift+4 move container to workspace $workspace4Name
+bindsym $mod+Shift+5 move container to workspace $workspace5Name
+bindsym $mod+Shift+6 move container to workspace $workspace6Name
+bindsym $mod+Shift+7 move container to workspace $workspace7Name
+bindsym $mod+Shift+8 move container to workspace $workspace8Name
+bindsym $mod+Shift+9 move container to workspace $workspace9Name
+bindsym $mod+Shift+0 move container to workspace $workspace10Name
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -163,11 +175,17 @@ bindsym $mod+Control+l exec lock
 bindsym $mod+Control+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Control+minus move scratchpad
 bindsym $mod+Control+plus scratchpad show
+bindsym $mod+Control+a focus child
 
 focus_follows_mouse off
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 1000 ms
 
 # Lock the screen after 15 minutes
-exec xautolock -time 15 -locker '~/bin/lock' &
+# $xautolocktime is in minutes
+set $xautolocktime 15
+# $xautolocknotify is in seconds
+set $xautolocknotify 30
+exec --no-startup-id xautolock -time $xautolocktime -notify $xautolocknotify -notifier 'notify-send --icon=gtk-info Auto-lock "Computer will lock in $xautolocknotify seconds"' -locker '~/bin/lock' &
 
+exec "pgrep pasystray || pasystray"
