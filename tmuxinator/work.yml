@@ -1,6 +1,6 @@
 # ~/.tmuxinator/default.yml
 
-name: default
+name: work
 root: ~/
 
 # Optional tmux socket
@@ -27,26 +27,21 @@ windows:
           panes:
                 -
                 -
-  - code:
-          layout: 4f48,142x39,0,0{86x39,0,0,1,55x39,87,0,5}
-          panes:
-                - cd ~/code
-                - cd ~/code
-  - aux:
-        layout: main-vertical
-        panes:
-                -
-                -
   - tools:
         layout: main-vertical
         panes:
                 -
-                - ~/0xDBE-142.3925.2/bin/0xdbe.sh
-                - java -jar ~/code/Beta-Sql/target/beta-db-1.0-SNAPSHOT-jar-with-dependencies.jar
-                - ~/tiresias/accounting2/run-Tiresias.sh
-                - ~/idea-IU-141.1532.4/bin/idea.sh
+                - 
+                - # java -jar ~/code/Beta-Sql/target/beta-db-1.0-SNAPSHOT-jar-with-dependencies.jar
+                - # ~/tiresias/accounting2/run-Tiresias.sh
+                - # ~/idea-IU-141.1532.4/bin/idea.sh
   - dual-build:
         layout: even-horizontal
         panes:
-                - cd ~/code
-                - cd ~/code
+                - cd ~/code/cwan/projects/aws
+                - cd ~/code/aws-git
+  - regression:
+        layout: even-vertical
+        panes:
+                - cd ~/tmp/regression
+                - cd ~/tmp/regression
