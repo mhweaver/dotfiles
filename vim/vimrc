@@ -1,6 +1,11 @@
 call plug#begin()
 
 Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'mhinz/vim-signify'
+Plug 'junegunn/seoul256.vim'
 
 call plug#end()
 
@@ -40,6 +45,9 @@ set rtp+=~/dotfiles/.extern/powerline/powerline/bindings/vim
 "python powerline_setup()
 "python del powerline_setup
 
+set splitbelow
+set splitright
+
 "Post plugin initialization stuff
 function! OnEnter()
 "Gundo
@@ -50,5 +58,13 @@ function! OnEnter()
 	endif
 endfunction
 
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+let g:signify_vcs_list = ['git', 'svn']
+
+"Seoul background color. Range: 233 (darkest) - 239 (lightest)
+let g:seoul256_background = 234
+colorscheme seoul256
 
 autocmd VimEnter * :call OnEnter()
