@@ -67,4 +67,11 @@ let g:signify_vcs_list = ['git', 'svn']
 let g:seoul256_background = 234
 colorscheme seoul256
 
+"Make CSVs readable
+function CsvTable()
+	:%!column -t -s ','
+	:set nowrap
+endfunction
+command CsvT exec CsvTable()
+
 autocmd VimEnter * :call OnEnter()
