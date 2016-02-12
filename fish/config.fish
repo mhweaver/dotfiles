@@ -18,3 +18,5 @@ set -x PYTHONPATH ~/dotfiles/.extern/powerline/:$PYTHONPATH
 set fish_function_path $fish_function_path "~/dotfiles/.extern/powerline/powerline/bindings/fish"
 source ~/dotfiles/.extern/powerline/powerline/bindings/fish/powerline-setup.fish
 powerline-setup
+
+source ~/dotfiles/env.fish
