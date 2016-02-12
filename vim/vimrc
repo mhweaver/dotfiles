@@ -69,7 +69,7 @@ colorscheme seoul256
 
 "Make CSVs readable
 function CsvTable()
-	:%!sed -e 's/,/, /' | column -t -s ','
+	:%!sed -e 's/,/, /g' | column -ts ','
 	:set nowrap
 endfunction
 command CsvT exec CsvTable()
