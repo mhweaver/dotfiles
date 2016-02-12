@@ -188,4 +188,4 @@ set $xautolocktime 15
 set $xautolocknotify 30
 exec --no-startup-id xautolock -time $xautolocktime -notify $xautolocknotify -notifier 'notify-send --icon=gtk-info Auto-lock "Computer will lock in $xautolocknotify seconds"' -locker '~/bin/lock' &
 
-exec "pgrep pasystray || pasystray"
+exec --no-startup-id "pgrep pasystray || pasystray"
