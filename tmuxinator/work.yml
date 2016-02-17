@@ -22,11 +22,6 @@ root: ~/
 # startup_window: logs
 
 windows:
-  - main:
-          layout: 4f48,142x39,0,0{86x39,0,0,1,55x39,87,0,5}
-          panes:
-                -
-                -
   - tools:
         layout: main-vertical
         panes:
@@ -35,7 +30,7 @@ windows:
                 - # java -jar ~/code/Beta-Sql/target/beta-db-1.0-SNAPSHOT-jar-with-dependencies.jar
                 - # ~/tiresias/accounting2/run-Tiresias.sh
                 - # ~/idea-IU-141.1532.4/bin/idea.sh
-  - dual-build:
+  - build:
         layout: even-horizontal
         panes:
                 - cd ~/code/cwan/projects/aws
