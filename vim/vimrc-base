@@ -6,7 +6,7 @@ call plug#begin()
 
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/seoul256.vim'
 
@@ -65,8 +65,8 @@ function! OnEnter()
 	endif
 endfunction
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
 
 let g:signify_vcs_list = ['git', 'svn']
 
