@@ -92,8 +92,8 @@ bindsym $mod+a focus parent
 set $workspace1Name 1: main
 set $workspace2Name 2: ide
 set $workspace3Name 3: term
-set $workspace4Name 4: comm
-set $workspace5Name 5: rdp
+set $workspace4Name 4
+set $workspace5Name 5
 set $workspace6Name 6
 set $workspace7Name 7
 set $workspace8Name 8
