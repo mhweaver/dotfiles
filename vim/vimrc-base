@@ -9,6 +9,9 @@ Plug 'tpope/vim-fugitive'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/seoul256.vim'
+Plug 'tpope/vim-sensible'
+Plug 'vim-scripts/taglist.vim'
+Plug 'fatih/vim-go'
 
 if (vimrc_level == "full")
 	Plug 'Valloric/YouCompleteMe'
