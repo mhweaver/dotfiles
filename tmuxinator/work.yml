@@ -33,8 +33,8 @@ windows:
   - build:
         layout: even-horizontal
         panes:
-                - cd ~/code/cwan/projects/aws
-                - cd ~/code/aws-git
+                - cd ~/code/
+                - cd ~/code/
   - regression:
         layout: even-vertical
         panes:
