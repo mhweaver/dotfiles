@@ -1,0 +1,9 @@
+#!/bin/bash
+max_length=$(($BLOCK_INSTANCE - 3))
+curr_window=`xdotool getactivewindow getwindowname 2>/dev/null || echo "None"`
+if [ `expr length "$curr_window"` -gt $max_length ]; then
+	displayed_title=`expr substr "$curr_window" 1 $max_length`...
+else
+	displayed_title=$curr_window
+fi
+echo "<b><i>$displayed_title</i></b>"

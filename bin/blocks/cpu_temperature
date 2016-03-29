@@ -1,0 +1,14 @@
+#!/bin/bash
+
+temp=$(cat /sys/devices/platform/coretemp.0/temp1_input)
+adjusted_temp=`calc $temp / 1000`
+
+# full text
+echo $adjusted_temp°C
+
+# short text
+echo $adjusted_temp°C
+
+if [ $adjusted_temp -gt 60 ]; then
+	echo \#FF0000
+fi

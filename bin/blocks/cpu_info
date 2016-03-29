@@ -1,0 +1,36 @@
+#!/bin/bash
+cpu_usage=`mpstat 1 1 | tail -n 1 | awk -F' ' '{ print 100 - $12 }'`
+allLoads=`cat /proc/loadavg | cut -d' ' -f 1-3`
+load1=`echo $allLoads | cut -d' ' -f 1`
+load2=`echo $allLoads | cut -d' ' -f 2`
+load3=`echo $allLoads | cut -d' ' -f 3`
+num_cores=`nproc`
+
+print_usage()
+{
+	if (( $(bc <<< "$1 > 50") )); then
+		echo -n "<span color='#FFFF00'>$1%</span>$2"
+	elif (( $(bc <<< "$1 > 80") )); then
+		echo -n "<span color='#FF0000'>$1%</span>$2"
+	else
+		echo -n "<span>$1%</span>$2"
+	fi
+}
+
+printload()
+{
+	if (( $(bc <<< "$1 > $num_cores * 0.50") )); then
+		echo -n "<span color='#FFFF00'>$1</span>$2"
+	elif (( $(bc <<< "$1 > $num_cores * 0.75") )); then
+		echo -n "<span color='#FF0000'>$1</span>$2"
+	else
+		echo -n "<span>$1</span>$2"
+	fi
+}
+
+print_usage $cpu_usage '  '
+
+printload $load1 ' '
+printload $load2 ' '
+printload $load3
+echo ''

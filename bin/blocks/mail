@@ -1,0 +1,50 @@
+#!/usr/bin/python
+# coding=utf-8
+
+import sys
+import imaplib
+import socket
+
+def usage():
+    print_count("Usage: mail username password")
+
+def print_count(count):
+    print (u' ' + unicode(count)).encode('utf-8')
+
+def logout() :
+    obj.close()
+    obj.logout()
+
+if len(sys.argv) < 3:
+    usage()
+    sys.exit(33)
+
+username = sys.argv[1]
+password = sys.argv[2]
+
+obj = None
+message = None
+try:
+    obj = imaplib.IMAP4('localhost','1143')
+    obj.login(username, password)
+    obj.select()
+    retcode, messages = obj.search(None,'UNSEEN')
+except socket.error:
+    print_count("Unable to get unread count")
+    sys.exit(33)
+
+if retcode != 'OK':
+    print_count('Unable to get unread count')
+    logout()
+    sys.exit(33)
+
+# Special case: If there are 0 new messages, messages contains a single empty string
+if len(messages) == 1:
+    if messages[0] == '':
+        print_count(0)
+        logout()
+        sys.exit(0)
+        
+
+print_count(len(messages))
+logout()

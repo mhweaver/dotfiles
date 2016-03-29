@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FILENAME=$1
+shift 1
+
+parallel --verbose scp $FILENAME {}: ::: $@

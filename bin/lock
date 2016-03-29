@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+PNG_FILE=$HOME/tmp/screen_locked.png
+# Take a screenshot
+scrot $PNG_FILE
+
+# Pixellate it 10x
+#convert $PNG_FILE -scale 10% -scale 1000% $PNG_FILE
+
+# Pixellate it 20x
+#convert $PNG_FILE -scale 5% -scale 2000% $PNG_FILE
+
+# Blur the image
+#convert $PNG_FILE -blur 0x6 $PNG_FILE
+
+# NEEDS MORE JPEG!!!!
+#convert $PNG_FILE -quality 1 -adaptive-sharpen 1 -blur 10x1.5 -adaptive-sharpen 1 -adaptive-blur 0.005 -format jpg $HOME/tmp/screen_locked.jpg
+#convert $HOME/tmp/screen_locked.jpg -format png $PNG_FILE
+#rm -f $HOME/tmp/screen_locked.jpg
+
+# ASCIIfy the screenshot
+convert $PNG_FILE -format jpg $HOME/tmp/screen_locked.jpg
+asciiscreen $HOME/tmp/screen_locked.jpg $PNG_FILE
+rm -f $HOME/tmp/screen_locked.jpg
+
+# Lock screen displaying this image.
+i3lock -i $PNG_FILE
+rm -f $PNG_FILE
+
+# Turn the screen off after a delay.
+sleep 600; pgrep i3lock && xset dpms force off
