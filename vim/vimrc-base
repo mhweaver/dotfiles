@@ -12,6 +12,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-sensible'
 Plug 'vim-scripts/taglist.vim'
 Plug 'fatih/vim-go'
+Plug 'altercation/vim-colors-solarized'
 
 if (vimrc_level == "full")
 	Plug 'Valloric/YouCompleteMe'
@@ -23,13 +24,14 @@ call plug#end()
 "General code formating options
 set linebreak
 set nu
-set noexpandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set autoindent
 set hlsearch
 set incsearch
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+autocmd FileType * set noexpandtab
+autocmd FileType haskell set expandtab
 
 set hidden
 "Enable syntax hightlighting
@@ -76,6 +78,8 @@ let g:signify_vcs_list = ['git', 'svn']
 "Seoul background color. Range: 233 (darkest) - 239 (lightest)
 let g:seoul256_background = 234
 colorscheme seoul256
+"set background=dark
+"colorscheme solarized
 
 "Make CSVs readable
 function CsvTable()

@@ -194,4 +194,6 @@ exec --no-startup-id xautolock -time $xautolocktime -notify $xautolocknotify -no
 
 # exec --no-startup-id "pgrep pasystray || pasystray"
 
-exec --no-startup-id "xrdv -load ~/.Xresources"
+#exec --no-startup-id "compton -bCG --inactive-dim 0.05 --backend glx"
+
+#exec --no-startup-id "xrdv -load ~/.Xresources"

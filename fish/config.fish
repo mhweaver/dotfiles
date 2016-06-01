@@ -20,3 +20,5 @@ source ~/dotfiles/.extern/powerline/powerline/bindings/fish/powerline-setup.fish
 powerline-setup
 
 source ~/dotfiles/env.fish
+
+eval (direnv hook fish)
