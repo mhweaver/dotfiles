@@ -1,0 +1,17 @@
+#compdef abduco
+
+_abduco_sessions() {
+	abduco | tail -n +2 | awk '{print $NF}' | xargs
+}
+
+_arguments \
+ 	'-v[Print version information to standard output and exit]' \
+	'-r[Readonly session]' \
+	'-e[Set the detach key]:Detach key' \
+	'-f[Force creation of session when is an already terminated session of the same name, after showing its exit status]' \
+	'-l[Attach with the lowest priority]' \
+	-	'(attachOption)' \
+	'-A[Try to connect to an existing session or create/attach to a new one if it does not exist]:session:($(_abduco_sessions))'\
+	'-a[Attach to an existing session]:session:($(_abduco_sessions))' \
+	'-c[Create a new session and attach immediately to it]:session:($(_abduco_sessions))' \
+	'-n[Create a new session and do not attach to it]:session:($(_abduco_sessions))' \
