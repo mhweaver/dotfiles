@@ -1,6 +1,16 @@
 if !exists("vimrc_level")
 	let vimrc_level="base"
 endif
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
+endfunction
+
 
 call plug#begin()
 
@@ -15,7 +25,7 @@ Plug 'fatih/vim-go'
 Plug 'altercation/vim-colors-solarized'
 
 if (vimrc_level == "full")
-	Plug 'Valloric/YouCompleteMe'
+	Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 endif
 
 call plug#end()
