@@ -57,6 +57,9 @@ import XMonad.Actions.GridSelect
 import Data.Maybe
 import Data.List
 
+import XMonad.Layout.Circle
+import qualified XMonad.Layout.Magnifier as Mag
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -73,7 +76,7 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
 -- Width of the window border in pixels.
-myBorderWidth   = 1
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -107,6 +110,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
     -- Toggle layout transformers
     , ((modm,                xK_f     ), sendMessage $ Toggle FULL, "mod-f : Toggle the full screen layout")
     , ((modm .|. controlMask,xK_f     ), sendMessage $ Toggle REFLECTX, "mod-control-f : Horizontally flip the current layout")
+    , ((modm .|. shiftMask,  xK_m     ), sendMessage Mag.Toggle, "mod-shift-m : Toggle magnifier")
 
     , ((modm,               xK_n     ), refresh, "mod-n : Render the currently visible workspaces")
 
@@ -185,7 +189,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
     --
     [((m .|. modm, k), windows $ f i, mStr ++ show n ++ " : " ++ h ++ show n)
         | (i, k, n) <- zip3 (XMonad.workspaces conf) [xK_1..] [1..]
-        , (f, m, mStr, h) <- [ (W.view , 0          , "mod-"        , "Switch to workspace ")      -- mod-N
+        , (f, m, mStr, h) <- [ (W.greedyView , 0          , "mod-"        , "Switch to workspace ")      -- mod-N
                              , (W.shift, shiftMask  , "mod-shift-"  , "Move window to workspace ") -- mod-shift
                              , (copy   , controlMask, "mod-control-", "Copy window to workspace ") -- mod-control
                              ]
@@ -233,7 +237,8 @@ myLayout = id
     . avoidStruts                -- Don't cover docked windows
     . mkToggle (single FULL)     -- Toggle full screen
     . mkToggle (single REFLECTX) -- Toggle flipping the layout
-    $ tiled ||| simpleTabbed ||| Mirror tiled ||| Full
+    . Mag.magnifiercz' 1.1
+    $ tiled ||| simpleTabbed ||| Mirror tiled ||| Full ||| Circle
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -331,7 +336,12 @@ myTitleLogHook output = do
                   ppCurrent = lemonbarColor "#ffff00" "" . wrap "[" "]"
                   ppVisible = lemonbarColor "#999999" "" . wrap "(" ")"
                   ppLayout color = lemonbarColor color "" . abbreviateLayoutName
-                  abbreviateLayoutName = abbreviateName . removePrefix "tabbed " . map toLower 
+                  abbreviateLayoutName = abbreviateName 
+                                       . removePrefix "tabbed " 
+                                       . replace "magnifier " "" -- From magnifier
+                                       . replace "nomaster " ""  -- From magnifier
+                                       . replace "(off) " ""     -- From magnifier
+                                       . map toLower 
                   abbreviateName = replace "mirror tall"     "wide"
                                  . replace "tabbed simplest" "tabbed"
                                  . replace "reflectx"        "flipped"
