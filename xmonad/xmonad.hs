@@ -63,33 +63,6 @@ import qualified XMonad.Layout.Magnifier as Mag
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
--- The preferred terminal program, which is used in a binding below and by
--- certain contrib modules.
-myTerminal      = "st"
-
--- Whether focus follows the mouse pointer.
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
-
--- Whether clicking on a window to focus also passes the click to the window
-myClickJustFocuses :: Bool
-myClickJustFocuses = False
-
--- Width of the window border in pixels.
-myBorderWidth   = 2
-
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
-myModMask       = mod4Mask
-
-myWorkspaces    = ["1:main","2:ide","3:term","4:misc","5","6","7","8","9"]
-
--- Border colors for unfocused and focused windows, respectively.
-myNormalBorderColor  = "#333333"
-myFocusedBorderColor = "#bb0000"
-
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 myKeys conf@(XConfig {XMonad.modMask = modm}) = 
@@ -109,7 +82,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
 
     -- Toggle layout transformers
     , ((modm,                xK_f     ), sendMessage $ Toggle FULL, "mod-f : Toggle the full screen layout")
-    , ((modm .|. controlMask,xK_f     ), sendMessage $ Toggle REFLECTX, "mod-control-f : Horizontally flip the current layout")
+    , ((modm .|. shiftMask,  xK_f     ), sendMessage $ Toggle REFLECTX, "mod-shift-f : Horizontally flip the current layout")
     , ((modm .|. shiftMask,  xK_m     ), sendMessage Mag.Toggle, "mod-shift-m : Toggle magnifier")
 
     , ((modm,               xK_n     ), refresh, "mod-n : Render the currently visible workspaces")
@@ -136,7 +109,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
     , ((modm              , xK_b     ), sendMessage ToggleStruts, "mod-b : Toggle the status bar gap")
 
     -- Manage xmonad
@@ -210,23 +182,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
                                 , (W.shift, shiftMask, "mod-shift-", "Move window to screen ")
                                 ]
     ]
-------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
-    ]
 
 ------------------------------------------------------------------------
 -- Layouts:
@@ -237,8 +192,8 @@ myLayout = id
     . avoidStruts                -- Don't cover docked windows
     . mkToggle (single FULL)     -- Toggle full screen
     . mkToggle (single REFLECTX) -- Toggle flipping the layout
-    . Mag.magnifiercz' 1.1
-    $ tiled ||| simpleTabbed ||| Mirror tiled ||| Full ||| Circle
+    . Mag.magnifiercz' 1.5
+    $ tiled ||| simpleTabbed ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -267,12 +222,7 @@ myLayout = id
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
-    <+> manageDocks
+myManageHook = manageDocks
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -368,12 +318,11 @@ myStartupHook = do
 -- Start up xmonad 
 main = do
     let lemonbarPrefs = " -U '#000000' -B '#000000' -F '#dddddd' -f 'DejaVu Sans Mono for Powerline:pixelsize=13:bold' -f 'FontAwesome'"
-        trayerPrefs = " --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 5 --transparent true --tint 0x000000 --height 17"
+        trayerPrefs   = " --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 5 --transparent true --tint 0x000000 --height 17"
 
     lemonbarproc <- spawnPipe $ "gostatus | lemonbar -b -u 3" ++ lemonbarPrefs
-    titleproc <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
-
-    spawn $ "killall trayer; trayer" ++ trayerPrefs
+    titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
+    spawn                     $ "killall trayer; trayer" ++ trayerPrefs
 
     xmonad 
         $ withUrgencyHookC 
@@ -387,18 +336,16 @@ main = do
         $ defaultConfig
              {
                -- simple stuff
-                 terminal           = myTerminal,
-                 focusFollowsMouse  = myFocusFollowsMouse,
-                 clickJustFocuses   = myClickJustFocuses,
-                 borderWidth        = myBorderWidth,
-                 modMask            = myModMask,
-                 workspaces         = myWorkspaces,
-                 normalBorderColor  = myNormalBorderColor,
-                 focusedBorderColor = myFocusedBorderColor,
+                 terminal           = "st",
+                 focusFollowsMouse  = False,
+                 borderWidth        = 2,
+                 modMask            = mod4Mask,
+                 workspaces         = ["1:main","2:ide","3:term","4:misc","5","6","7","8","9"],
+                 normalBorderColor  = "#555555",
+                 focusedBorderColor = "#bb0000",
 
                -- key bindings
                  keys               = M.fromList . map (\(binding, action, _) -> (binding, action)) . myKeys,
-                 mouseBindings      = myMouseBindings,
 
                -- hooks, layouts
                  layoutHook         = myLayout,
