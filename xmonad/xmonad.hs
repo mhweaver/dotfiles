@@ -57,7 +57,6 @@ import XMonad.Actions.GridSelect
 import Data.Maybe
 import Data.List
 
-import XMonad.Layout.Circle
 import qualified XMonad.Layout.Magnifier as Mag
 
 import qualified XMonad.StackSet as W
