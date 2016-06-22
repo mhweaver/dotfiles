@@ -337,6 +337,7 @@ main = do
                -- simple stuff
                  terminal           = "st",
                  focusFollowsMouse  = False,
+                 clickJustFocuses   = False,
                  borderWidth        = 2,
                  modMask            = mod4Mask,
                  workspaces         = ["1:main","2:ide","3:term","4:misc","5","6","7","8","9"],
