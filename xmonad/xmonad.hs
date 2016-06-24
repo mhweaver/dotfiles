@@ -264,7 +264,7 @@ lemonbarScreen sid  = lemonbarTag $ "S" ++ show sid
 
 myTitleLogHook :: (String -> IO ()) -> X ()
 myTitleLogHook output = do
-    winset <- gets windowset
+    winset        <- gets windowset
     currentTitle  <- maybe (return "") (fmap show . getName) . W.peek $ winset
 
     let screenOut screen = lemonbarScreen sid $ pp workspaceName layout
@@ -285,18 +285,24 @@ myTitleLogHook output = do
                   ppCurrent = lemonbarColor "#ffff00" "" . wrap "[" "]"
                   ppVisible = lemonbarColor "#999999" "" . wrap "(" ")"
                   ppLayout color = lemonbarColor color "" . abbreviateLayoutName
-                  abbreviateLayoutName = abbreviateName 
-                                       . removePrefix "tabbed " 
-                                       . replace "magnifier " "" -- From magnifier
-                                       . replace "nomaster " ""  -- From magnifier
-                                       . replace "(off) " ""     -- From magnifier
+                  abbreviateLayoutName = unwords 
+                                       . abbreviateName
+                                       . removePrefix "tabbed"
+                                       . filter allowedInLayoutName
+                                       . words
                                        . map toLower 
-                  abbreviateName = replace "mirror tall"     "wide"
-                                 . replace "tabbed simplest" "tabbed"
-                                 . replace "reflectx"        "flipped"
-                  removePrefix prefix str
-                          | prefix `isPrefixOf` str = drop (length prefix) str
-                          | otherwise               = str
+                  abbreviateName [] = []
+                  abbreviateName ("mirror":"tall":rest)     = "wide"    : abbreviateName rest
+                  abbreviateName ("tabbed":"simplest":rest) = "tabbed"  : abbreviateName rest
+                  abbreviateName ("reflectx":rest)          = "flipped" : abbreviateName rest
+                  abbreviateName rest = rest
+                  allowedInLayoutName "magnifier" = False
+                  allowedInLayoutName "nomaster"  = False
+                  allowedInLayoutName "(off)"     = False
+                  allowedInLayoutName _           = True
+                  removePrefix prefix xs = case xs of
+                                              (prefix:rest) -> rest
+                                              _             -> xs
 
     let outStr = return . concat . map screenOut $ W.screens winset
     outStr >>= io . output
