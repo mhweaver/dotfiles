@@ -26,17 +26,7 @@ windows:
         layout: main-vertical
         panes:
                 -
-                - 
-                - # java -jar ~/code/Beta-Sql/target/beta-db-1.0-SNAPSHOT-jar-with-dependencies.jar
-                - # ~/tiresias/accounting2/run-Tiresias.sh
-                - # ~/idea-IU-141.1532.4/bin/idea.sh
   - build:
         layout: even-horizontal
         panes:
-                - cd ~/code/
-                - cd ~/code/
-  - regression:
-        layout: even-vertical
-        panes:
-                - cd ~/tmp/regression
-                - cd ~/tmp/regression
+                - cd ~/code/; abduco -A build
