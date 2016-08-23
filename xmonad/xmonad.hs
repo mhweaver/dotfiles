@@ -292,10 +292,10 @@ myTitleLogHook output = do
                                        . words
                                        . map toLower 
                   abbreviateName [] = []
+                  abbreviateName ("reflectx":rest)          = "flipped" : abbreviateName rest
                   abbreviateName ("mirror":"tall":rest)     = "wide"    : abbreviateName rest
                   abbreviateName ("tabbed":"simplest":rest) = "tabbed"  : abbreviateName rest
-                  abbreviateName ("reflectx":rest)          = "flipped" : abbreviateName rest
-                  abbreviateName rest = rest
+                  abbreviateName name = name
                   allowedInLayoutName "magnifier" = False
                   allowedInLayoutName "nomaster"  = False
                   allowedInLayoutName "(off)"     = False
@@ -328,6 +328,7 @@ main = do
     lemonbarproc <- spawnPipe $ "gostatus | lemonbar -b -u 3" ++ lemonbarPrefs
     titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
     spawn                     $ "killall trayer; trayer" ++ trayerPrefs
+    --spawn                     $ "killall compton; compton"
 
     xmonad 
         $ withUrgencyHookC 
