@@ -23,9 +23,11 @@ Plug 'tpope/vim-sensible'
 Plug 'vim-scripts/taglist.vim'
 Plug 'fatih/vim-go'
 Plug 'altercation/vim-colors-solarized'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 if (vimrc_level == "full")
 	Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+	Plug 'eagletmt/neco-ghc'
 endif
 
 call plug#end()
@@ -40,8 +42,13 @@ set incsearch
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set shiftround
 autocmd FileType * set noexpandtab
 autocmd FileType haskell set expandtab
+"
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 set hidden
 "Enable syntax hightlighting
@@ -97,5 +104,8 @@ function CsvTable()
 	:set nowrap
 endfunction
 command CsvT exec CsvTable()
+
+"Enable auto-complete for haskell in YCM
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 autocmd VimEnter * :call OnEnter()
