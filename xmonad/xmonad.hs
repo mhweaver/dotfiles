@@ -240,10 +240,10 @@ myLogHookPP stdOutProc color =
     defaultPP { ppOutput = hPutStrLn stdOutProc
               , ppCurrent = color "#ffff00" "" . wrap "[" "]"
               , ppUrgent = color "#ff0000" "#ffff00"
-              , ppTitle = (\_ -> "") 
+              , ppTitle = const "" 
               , ppSep = " : "
               , ppSort = getSortByXineramaRule
-              , ppLayout = (\_ -> "")
+              , ppLayout = const ""
               , ppVisible = color "#999999" "" . wrap "(" ")"
               }
 
