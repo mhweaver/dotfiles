@@ -25,7 +25,7 @@ windows:
   - tools:
         layout: main-vertical
         panes:
-                -
+                - abduco -A tools
   - build:
         layout: even-horizontal
         panes:
