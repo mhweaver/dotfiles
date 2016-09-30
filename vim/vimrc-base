@@ -37,12 +37,14 @@ call plug#end()
 set linebreak
 set nu
 set autoindent
+set breakindent
 set hlsearch
 set incsearch
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
+set emoji
 autocmd FileType * set noexpandtab
 autocmd FileType haskell set expandtab
 "

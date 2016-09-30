@@ -11,14 +11,12 @@ import XMonad.Hooks.DynamicLog             ( dynamicLogWithPP
                                            , ppUrgent
                                            , ppHidden
                                            , ppSort
-                                           , shorten
                                            , ppLayout
                                            , ppVisible
                                            , wrap )
-import System.Exit                         ( exitWith
-                                           , ExitCode(ExitSuccess) )
-import Data.List                           ( isPrefixOf )
+import System.Exit                         ( exitSuccess )
 import Data.Char                           ( toLower )
+import Data.Maybe                          ( fromMaybe )
 import XMonad.Layout.Reflect               ( REFLECTX(REFLECTX) )
 import XMonad.Layout.LayoutCombinators     ( (|||) )
 import XMonad.Hooks.ManageDocks            ( ToggleStruts(ToggleStruts)
@@ -43,26 +41,33 @@ import XMonad.Layout.BoringWindows         ( focusDown
                                            , boringWindows )
 import XMonad.Layout.Tabbed                ( simpleTabbed
                                            , Direction2D(U, D, L, R) )
-import XMonad.Hooks.EwmhDesktops           ( ewmhDesktopsEventHook )
+import XMonad.Hooks.EwmhDesktops           ( ewmhDesktopsEventHook
+                                           , fullscreenEventHook
+                                           , ewmh )
 import XMonad.Layout.MultiToggle           ( Toggle(Toggle)
                                            , mkToggle
                                            , single )
 import XMonad.Layout.MultiToggle.Instances ( StdTransformers(FULL) )
 import XMonad.Util.NamedWindows            ( getName )
-
-import XMonad.Hooks.UrgencyHook
-import XMonad.Util.Loggers
-import XMonad.Util.WorkspaceCompare
-import XMonad.Actions.GridSelect
-import Data.Maybe
-import Data.List
+import XMonad.Hooks.UrgencyHook            ( withUrgencyHookC
+                                           , BorderUrgencyHook(BorderUrgencyHook)
+                                           , urgencyBorderColor
+                                           , urgencyConfig
+                                           , SuppressWhen(Focused)
+                                           , suppressWhen
+                                           , RemindWhen(Every)
+                                           , remindWhen )
+import XMonad.Util.WorkspaceCompare        ( getSortByXineramaRule )
+import XMonad.Actions.GridSelect           ( defaultGSConfig
+                                           , goToSelected
+                                           , gridselectWorkspace )
 
 import qualified XMonad.Layout.Magnifier as Mag
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-myKeys conf@(XConfig {XMonad.modMask = modm}) = 
+myKeys conf@XConfig {XMonad.modMask = modm} = 
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return  ), spawn $ XMonad.terminal conf)
     , ((modm .|. shiftMask, xK_KP_Enter), spawn $ XMonad.terminal conf)
@@ -109,7 +114,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Manage xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Lock the screen
@@ -142,6 +147,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
 
     , ((modm                , xK_a    ), withFocused $ sendMessage . UnMerge)
     , ((modm                , xK_s    ), submap $ defaultSublMap conf)
+
+    -- Hack to fix chrome select menus (https://bugs.chromium.org/p/chromium/issues/detail?id=510079#c78)
+    , ((modm                , xK_g   ), spawn "xprop -root -remove _NET_WORKAREA")
     ]
     ++
 
@@ -176,8 +184,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
 
 ------------------------------------------------------------------------
 -- Layouts:
-myLayout = id
-    . windowNavigation           -- Easy window navigation
+myLayout = windowNavigation           -- Easy window navigation
     . subTabbed                  -- Tabbed sublayouts = all kinds of buggy fun
     . boringWindows              -- Skip over hidden windows (e.g., hidden subtabs)
     . avoidStruts                -- Don't cover docked windows
@@ -224,7 +231,7 @@ myManageHook = manageDocks
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = docksEventHook <+> ewmhDesktopsEventHook
+myEventHook = docksEventHook <+> ewmhDesktopsEventHook <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -249,7 +256,7 @@ lemonbarColor fg bg = wrap (fg1++bg1) (fg2++bg2)
           (bg1,bg2) | null bg = ("", "")
                     | otherwise = ("%{B" ++ bg ++ "}", "%{B-}")
 lemonbarStrip       = replace "%{" "%%{"
-lemonbarTag tag     = ((wrap "%{" "}" tag) ++)
+lemonbarTag tag     = (wrap "%{" "}" tag ++)
 lemonbarCenter      = lemonbarTag "c"
 lemonbarLeft        = lemonbarTag "l"
 lemonbarScreen sid  = lemonbarTag $ "S" ++ show sid
@@ -296,7 +303,7 @@ myTitleLogHook output = do
                                               (prefix:rest) -> rest
                                               _             -> xs
 
-    let outStr = return . concat . map screenOut $ W.screens winset
+    let outStr = return . concatMap screenOut $ W.screens winset
     outStr >>= io . output
 
 myLogHook lemonbarproc titleproc = do
@@ -322,6 +329,7 @@ main = do
     spawn                     $ "killall trayer; trayer" ++ trayerPrefs
 
     xmonad 
+        $ ewmh
         $ withUrgencyHookC 
             BorderUrgencyHook 
                 { urgencyBorderColor = "#ff0000" } 
