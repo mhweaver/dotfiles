@@ -67,13 +67,12 @@ import qualified XMonad.Layout.Magnifier as Mag
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-myKeys conf@XConfig {XMonad.modMask = modm} = 
+myKeys conf@XConfig {XMonad.modMask = modm} =
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return  ), spawn $ XMonad.terminal conf)
     , ((modm .|. shiftMask, xK_KP_Enter), spawn $ XMonad.terminal conf)
 
     -- Launch launchers
-    , ((modm,               xK_p     ), spawn "dmenu_run")
     , ((modm,               xK_d     ), spawn "rofi -show run")
     , ((modm .|. shiftMask, xK_d     ), spawn "rofi -show drun")
 
@@ -120,10 +119,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
     -- Lock the screen
     , ((modm .|. controlMask, xK_l   ), spawn "lock")
 
-    -- Send active window to workspace on other screen
-    , ((modm .|. shiftMask .|. controlMask, xK_Right), shiftNextScreen)
-    , ((modm .|. shiftMask .|. controlMask, xK_Left) , shiftPrevScreen)
-
     -- Promote the current window to master to swap the first slave with master
     , ((modm .|. controlMask, xK_Return  ), promote)
     , ((modm .|. controlMask, xK_KP_Enter), promote)
@@ -138,15 +133,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
     , ((modm .|. shiftMask, xK_Left ), sendMessage $ Swap L)
     , ((modm .|. shiftMask, xK_Up   ), sendMessage $ Swap U)
     , ((modm .|. shiftMask, xK_Down ), sendMessage $ Swap D)
-
-    -- Sublayout bindings
-    , ((modm .|. controlMask, xK_Right), sendMessage $ pullGroup R)
-    , ((modm .|. controlMask, xK_Left ), sendMessage $ pullGroup L)
-    , ((modm .|. controlMask, xK_Up   ), sendMessage $ pullGroup U)
-    , ((modm .|. controlMask, xK_Down ), sendMessage $ pullGroup D)
-
-    , ((modm                , xK_a    ), withFocused $ sendMessage . UnMerge)
-    , ((modm                , xK_s    ), submap $ defaultSublMap conf)
 
     -- Hack to fix chrome select menus (https://bugs.chromium.org/p/chromium/issues/detail?id=510079#c78)
     , ((modm                , xK_g   ), spawn "xprop -root -remove _NET_WORKAREA")
@@ -166,10 +152,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
                        ]
     ]
     ++
-    -- Remove the current window from all other workspaces
-    -- (this binding is down here to keep it with the other workspace-related bindings)
-    ((modm,       xK_v), killAllOtherCopies)
-    :
 
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
@@ -184,7 +166,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
 
 ------------------------------------------------------------------------
 -- Layouts:
-myLayout = windowNavigation           -- Easy window navigation
+myLayout = windowNavigation      -- Easy window navigation
     . subTabbed                  -- Tabbed sublayouts = all kinds of buggy fun
     . boringWindows              -- Skip over hidden windows (e.g., hidden subtabs)
     . avoidStruts                -- Don't cover docked windows
@@ -195,13 +177,10 @@ myLayout = windowNavigation           -- Easy window navigation
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
-
      -- The default number of windows in the master pane
      nmaster = 1
-
      -- Default proportion of screen occupied by master pane
      ratio   = 2/3
-
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
@@ -239,7 +218,7 @@ myLogHookPP stdOutProc color =
     defaultPP { ppOutput = hPutStrLn stdOutProc
               , ppCurrent = color "#ffff00" "" . wrap "[" "]"
               , ppUrgent = color "#ff0000" "#ffff00"
-              , ppTitle = const "" 
+              , ppTitle = const ""
               , ppSep = " : "
               , ppSort = getSortByXineramaRule
               , ppLayout = const ""
@@ -250,7 +229,7 @@ lemonbarColor :: String -- ^ foreground color
               -> String -- ^ background color
               -> String -- ^ input string to color
               -> String -- ^ colored output
-lemonbarColor fg bg = wrap (fg1++bg1) (fg2++bg2)
+lemonbarColor fg bg = wrap (fg1++bg1) (bg2++fg2)
     where (fg1,fg2) | null fg  = ("","")
                     | otherwise = ("%{F" ++ fg ++ "}", "%{F-}")
           (bg1,bg2) | null bg = ("", "")
@@ -260,6 +239,8 @@ lemonbarTag tag     = (wrap "%{" "}" tag ++)
 lemonbarCenter      = lemonbarTag "c"
 lemonbarLeft        = lemonbarTag "l"
 lemonbarScreen sid  = lemonbarTag $ "S" ++ show sid
+removePrefix prefix xs = case xs of (prefix:rest) -> rest
+                                    _             -> xs
 
 myTitleLogHook :: (String -> IO ()) -> X ()
 myTitleLogHook output = do
@@ -272,24 +253,20 @@ myTitleLogHook output = do
                   workspaceName = fromMaybe "no workspaceName found" $ W.lookupWorkspace (W.screen screen) winset
 
         pp workspaceName layout = lemonbarLeft left ++ lemonbarCenter center
-            where (left, center) = if currentTag == workspaceName 
-                                   then (ppCurrent workspaceName 
-                                         ++ " : " ++ ppLayout "#ffffff" layout
-                                        , ppTitle currentTitle)
-                                   else (ppVisible workspaceName 
-                                         ++ " : " ++ ppLayout "#bbbbbb" layout
-                                        , "")
-                                   where currentTag = W.currentTag winset
+            where currentTag = W.currentTag winset
+                  (left, center) = if currentTag == workspaceName
+                                   then (ppCurrent workspaceName ++ " : " ++ ppLayout "#ffffff" layout, ppTitle currentTitle)
+                                   else (ppVisible workspaceName ++ " : " ++ ppLayout "#bbbbbb" layout, "")
                   ppTitle   = lemonbarColor "#00ff00" "" . lemonbarStrip
                   ppCurrent = lemonbarColor "#ffff00" "" . wrap "[" "]"
                   ppVisible = lemonbarColor "#999999" "" . wrap "(" ")"
                   ppLayout color = lemonbarColor color "" . abbreviateLayoutName
-                  abbreviateLayoutName = unwords 
+                  abbreviateLayoutName = unwords
                                        . abbreviateName
                                        . removePrefix "tabbed"
                                        . filter allowedInLayoutName
                                        . words
-                                       . map toLower 
+                                       . map toLower
                   abbreviateName [] = []
                   abbreviateName ("reflectx":rest)          = "flipped" : abbreviateName rest
                   abbreviateName ("mirror":"tall":rest)     = "wide"    : abbreviateName rest
@@ -299,9 +276,6 @@ myTitleLogHook output = do
                   allowedInLayoutName "nomaster"  = False
                   allowedInLayoutName "(off)"     = False
                   allowedInLayoutName _           = True
-                  removePrefix prefix xs = case xs of
-                                              (prefix:rest) -> rest
-                                              _             -> xs
 
     let outStr = return . concatMap screenOut $ W.screens winset
     outStr >>= io . output
@@ -319,7 +293,7 @@ myLogHook lemonbarproc titleproc = do
 myStartupHook = setWMName "LG3D"
 
 ------------------------------------------------------------------------
--- Start up xmonad 
+-- Start up xmonad
 main = do
     let lemonbarPrefs = " -U '#000000' -B '#000000' -F '#dddddd' -f 'DejaVu Sans Mono for Powerline:pixelsize=13:bold' -f 'FontAwesome'"
         trayerPrefs   = " --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 5 --transparent true --tint 0x000000 --height 17"
@@ -328,16 +302,16 @@ main = do
     titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
     spawn                     $ "killall trayer; trayer" ++ trayerPrefs
 
-    xmonad 
+    xmonad
         $ ewmh
-        $ withUrgencyHookC 
-            BorderUrgencyHook 
-                { urgencyBorderColor = "#ff0000" } 
-            urgencyConfig 
-                { 
+        $ withUrgencyHookC
+            BorderUrgencyHook
+                { urgencyBorderColor = "#ff0000" }
+            urgencyConfig
+                {
                   suppressWhen = Focused,
                   remindWhen   = Every 60
-                } 
+                }
         $ defaultConfig
              {
                -- simple stuff
