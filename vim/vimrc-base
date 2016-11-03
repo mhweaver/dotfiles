@@ -22,6 +22,7 @@ Plug 'tpope/vim-sensible'
 Plug 'majutsushi/tagbar'
 Plug 'fatih/vim-go'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 if (vimrc_level == "full")
@@ -91,9 +92,6 @@ function! OnEnter()
 	endif
 endfunction
 
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-
 let g:signify_vcs_list = ['git', 'svn']
 
 "Seoul background color. Range: 233 (darkest) - 239 (lightest)
@@ -101,6 +99,8 @@ let g:seoul256_background = 234
 colorscheme seoul256
 "set background=dark
 "colorscheme solarized
+
+highlight ExtraWhitespace ctermbg=red
 
 "Make CSVs readable
 function CsvTable()
