@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CMD=$1
+shift 1
+ARGS=$@
+
+if [ $DVTM_CMD_FIFO ]; then
+	# If this is already dvtm instance with a cmd fifo, ssh from this dvtm
+	for arg in $ARGS
+	do
+		echo create \"$CMD $arg\" > $DVTM_CMD_FIFO
+	done
+else
+	# Not already in a dvtm instance with a cmd fifo, so fire up a new dvtm to ssh from 
+	for arg in $ARGS
+	do
+		CMDS="$CMDS '$CMD $arg'"
+	done
+	eval abduco -A ssh-`uuidgen` /usr/local/bin/dvtm $CMDS
+fi
