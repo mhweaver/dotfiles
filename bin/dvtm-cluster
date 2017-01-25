@@ -10,8 +10,9 @@ if [ $DVTM_CMD_FIFO ]; then
 	do
 		echo create \"$CMD $arg\" > $DVTM_CMD_FIFO
 	done
+	echo focus $DVTM_WINDOW_ID > $DVTM_CMD_FIFO
 else
-	# Not already in a dvtm instance with a cmd fifo, so fire up a new dvtm to ssh from 
+	# Not already in a dvtm instance with a cmd fifo, so fire up a new dvtm from which to ssh
 	for arg in $ARGS
 	do
 		CMDS="$CMDS '$CMD $arg'"
