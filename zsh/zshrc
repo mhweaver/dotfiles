@@ -1,0 +1,30 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+export EDITOR=vim
+export DVTM_PAGER='less -R'
+export DVTM_EDITOR='vis'
+
+fpath=(~/dotfiles/zsh/completions $fpath)
+fpath=(~/bin/wd $fpath)
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+wd() {
+  . "$HOME/bin/wd/wd.sh"
+}
+
+alias to='wd'
+alias f='fasd -f'
+alias v='f -e vim'
+alias gdiff='git diff --word-diff'
+alias surf='xembed -e surf'
+alias st='xembed -w st'
