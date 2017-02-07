@@ -3,4 +3,5 @@
 FILENAME=$1
 shift 1
 
-parallel --verbose scp $FILENAME {}: ::: $@
+# parallel --verbose scp $FILENAME {}: ::: $@
+echo $@ | xargs -n 1 echo | xargs --verbose -n 1 -P 0 -I % scp $FILENAME %:
