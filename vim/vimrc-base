@@ -25,6 +25,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'dodie/vim-disapprove-deep-indentation'
+Plug 'easymotion/vim-easymotion'
 
 if (vimrc_level == "full")
 	"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
