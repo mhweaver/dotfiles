@@ -1,5 +1,5 @@
 if !exists("vimrc_level")
-	let vimrc_level="base"
+	let vimrc_level="full"
 endif
 function! BuildYCM(info)
   " info is a dictionary with 3 fields

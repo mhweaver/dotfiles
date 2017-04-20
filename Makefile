@@ -23,9 +23,6 @@ link-tmux: FORCE
 	./link-tmux.sh
 
 link-vim: FORCE
-	./link-vim.sh full
-
-link-vim-lite: FORCE
-	./link-vim.sh lite
+	stow vim
 
 FORCE:
