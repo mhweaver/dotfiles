@@ -8,7 +8,8 @@ install-powerline: FORCE
 	./install-powerline.sh
 
 install-vim: FORCE
-	./install-vim.sh
+	git submodule init
+	git submodule update --recursive
 
 install-bash: FORCE
 	./install-bash.sh

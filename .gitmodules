@@ -1,3 +1,10 @@
 [submodule "submodules/sensible-defaults"]
 	path = submodules/sensible-defaults
 	url = https://github.com/hrs/sensible-defaults.el
+[submodule "submodules/powerline"]
+	path = submodules/powerline
+	url = https://github.com/powerline/powerline
+	branch = master
+[submodule "submodules/vim-plug"]
+	path = submodules/vim-plug
+	url = https://github.com/junegunn/vim-plug
