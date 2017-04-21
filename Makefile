@@ -13,7 +13,7 @@ install-bash: FORCE
 	./install-bash.sh
 
 link-powerline: FORCE
-	./link-powerline.sh
+	stow powerline
 
 link-tmux: FORCE
 	./link-tmux.sh
