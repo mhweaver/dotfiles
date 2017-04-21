@@ -16,7 +16,7 @@ link-powerline: FORCE
 	stow powerline
 
 link-tmux: FORCE
-	./link-tmux.sh
+	stow tmux
 
 link-vim: FORCE
 	stow vim
