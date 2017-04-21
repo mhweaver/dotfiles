@@ -1,6 +1,6 @@
 all: install link
 
-link: link-fish link-powerline link-tmux link-vim
+link: link-powerline link-tmux link-vim
 
 install: install-powerline install-vim
 
@@ -11,9 +11,6 @@ install-vim: init-submodules
 
 install-bash: FORCE
 	./install-bash.sh
-
-link-fish: FORCE
-	./link-fish.sh
 
 link-powerline: FORCE
 	./link-powerline.sh
