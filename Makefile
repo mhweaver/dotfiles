@@ -4,12 +4,10 @@ link: link-fish link-powerline link-tmux link-vim
 
 install: install-powerline install-vim
 
-install-powerline: FORCE
-	./install-powerline.sh
+install-powerline: init-submodules
+	cd submodules/powerline; python setup.py build
 
-install-vim: FORCE
-	git submodule init
-	git submodule update --recursive
+install-vim: init-submodules
 
 install-bash: FORCE
 	./install-bash.sh
@@ -25,5 +23,8 @@ link-tmux: FORCE
 
 link-vim: FORCE
 	stow vim
+
+init-submodules:	FORCE
+	git submodule update --init --recursive
 
 FORCE:
