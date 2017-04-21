@@ -3,7 +3,7 @@
 PNG_FILE=$HOME/tmp/screen_locked.png
 rm -f $PNG_FILE
 # Take a screenshot
-#scrot $PNG_FILE
+scrot $PNG_FILE # Use then when maim isn't being used
 
 # Pixellate it 10x
 #maim --format png /dev/stdout | convert - -scale 10% -scale 1000% $PNG_FILE &
@@ -16,6 +16,8 @@ rm -f $PNG_FILE
 #maim --format png /dev/stdout | convert - -resize 25% -blur 0x2 -resize 400% $PNG_FILE &
 #maim --format png --mask="on" /dev/stdout | png2ff | filter | ff2png > $PNG_FILE &
 #maim --format jpg --mask="on" /dev/stdout | jpg2ff | filter | ff2png > $PNG_FILE &
+
+# Blur filter + Mondrian mask
 #maim --format jpg --mask="on" /dev/stdout | jpg2ff | mondrian | ff2png > $PNG_FILE
 
 # NEEDS MORE JPEG!!!!
@@ -24,12 +26,13 @@ rm -f $PNG_FILE
 #rm -f $HOME/tmp/screen_locked.jpg
 
 # ASCIIfy the screenshot
-# convert $PNG_FILE -format jpg $HOME/tmp/screen_locked.jpg
-# asciiscreen $HOME/tmp/screen_locked.jpg $PNG_FILE
-# rm -f $HOME/tmp/screen_locked.jpg
+convert $PNG_FILE -format jpg $HOME/tmp/screen_locked.jpg
+asciiscreen $HOME/tmp/screen_locked.jpg $PNG_FILE
+rm -f $HOME/tmp/screen_locked.jpg
 
 # Turn the screen off after a delay.
 (sleep 1200; pgrep xsecurelock && xset dpms force off) &
 
 # Lock screen displaying this image.
-(xsecurelock auth_pam_x11 saver_code; rm -f $PNG_FILE) &
+#(xsecurelock auth_pam_x11 saver_code; rm -f $PNG_FILE) &
+(xsecurelock auth_pam_x11 saver_screenshot; rm -f $PNG_FILE) &
