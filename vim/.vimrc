@@ -14,6 +14,8 @@ endfunction
 
 call plug#begin()
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
@@ -72,14 +74,12 @@ set mousehide
 "autocmd InsertEnter * :set number norelativenumber"
 "autocmd InsertLeave * :set number relativenumber"
 
-"Enable powerline
+"Enable airline
 set laststatus=2 "Needed to show the status line
 set showtabline=2 "Needed to show the tabline
 set t_Co=256 "Colors!
-set rtp+=~/.local/share/powerline/powerline/bindings/vim
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
+let g:airline_powerline_fonts=1
+let g:airline_theme='powerlineish'
 
 set splitbelow
 set splitright
