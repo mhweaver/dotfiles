@@ -1,0 +1,22 @@
+[core]
+	preloadindex = true
+	editor = vim
+[user]
+	name = "mhweaver"
+	email = "mhweaver@gmail.com"
+[includeIf "gitdir:~/code/"]
+	path = ~/.gitconfig-work
+[push]
+	default = simple
+[help]
+	autocorrect = 1
+[alias]
+	last = cat-file commit HEAD
+	commitv = commit -v
+	dmerge = merge --no-ff
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	pager = true
+	status = auto
