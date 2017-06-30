@@ -84,6 +84,23 @@ let g:airline_theme='powerlineish'
 set splitbelow
 set splitright
 
+" Move vertically by visual line
+" If the line is wrapped, this will move it to the next part of the wrapped line rather than the next "real" line
+nnoremap j gj
+nnoremap k gk
+
+" Folding
+" Enable folding
+set foldenable
+" Open most folds by default
+set foldlevelstart=10
+" Folds can be nested, so we will limit nested folding to only go 10 deep
+set foldnestmax=10
+" Space opens and closes folds
+nnoremap <space> za
+" Fold based on indent level
+set foldmethod=indent
+
 "Post plugin initialization stuff
 function! OnEnter()
 "Gundo
