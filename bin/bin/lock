@@ -2,33 +2,39 @@
 
 PNG_FILE=$HOME/tmp/screen_locked.png
 rm -f $PNG_FILE
-# Take a screenshot
-scrot $PNG_FILE # Use then when maim isn't being used
 
 # Pixellate it 10x
-#maim --format png /dev/stdout | convert - -scale 10% -scale 1000% $PNG_FILE &
+#maim --format png /dev/stdout | convert - -scale 10% -scale 1000% $PNG_FILE
 
 # Pixellate it 20x
-#maim --format png /dev/stdout | convert - -scale 5% -scale 2000% $PNG_FILE &
+#maim --format png /dev/stdout | convert - -scale 5% -scale 2000% $PNG_FILE
 
 # Blur the image
 #maim --format png /dev/stdout | convert - -blur 0x6 $PNG_FILE &
 #maim --format png /dev/stdout | convert - -resize 25% -blur 0x2 -resize 400% $PNG_FILE &
 #maim --format png --mask="on" /dev/stdout | png2ff | filter | ff2png > $PNG_FILE &
-#maim --format jpg --mask="on" /dev/stdout | jpg2ff | filter | ff2png > $PNG_FILE &
+maim --format jpg --mask="on" /dev/stdout | jpg2ff | filter | ff2png > $PNG_FILE
 
 # Blur filter + Mondrian mask
 #maim --format jpg --mask="on" /dev/stdout | jpg2ff | mondrian | ff2png > $PNG_FILE
 
 # NEEDS MORE JPEG!!!!
-#convert $PNG_FILE -quality 1 -adaptive-sharpen 1 -blur 10x1.5 -adaptive-sharpen 1 -adaptive-blur 0.015 -format jpg $HOME/tmp/screen_locked.jpg
+#maim --format jpg --mask="on" /dev/stdout | convert - \
+#	-quality 1 \
+#	-adaptive-sharpen 1 \
+#	-blur 10x1.5 \
+#	-adaptive-sharpen 1 \
+#	-adaptive-blur 0.015 \
+#	-format jpg $HOME/tmp/screen_locked.jpg
 #convert $HOME/tmp/screen_locked.jpg -format png $PNG_FILE
 #rm -f $HOME/tmp/screen_locked.jpg
 
 # ASCIIfy the screenshot
-convert $PNG_FILE -format jpg $HOME/tmp/screen_locked.jpg
-asciiscreen $HOME/tmp/screen_locked.jpg $PNG_FILE
-rm -f $HOME/tmp/screen_locked.jpg
+# Take a screenshot
+#scrot $PNG_FILE # Use then when maim isn't being used
+#convert $PNG_FILE -format jpg $HOME/tmp/screen_locked.jpg
+#asciiscreen $HOME/tmp/screen_locked.jpg $PNG_FILE
+#rm -f $HOME/tmp/screen_locked.jpg
 
 # Turn the screen off after a delay.
 (sleep 1200; pgrep xsecurelock && xset dpms force off) &
