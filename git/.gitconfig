@@ -20,3 +20,5 @@
 	interactive = auto
 	pager = true
 	status = auto
+[log]
+	date = local
