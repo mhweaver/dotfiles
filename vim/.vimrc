@@ -31,7 +31,14 @@ Plug 'easymotion/vim-easymotion'
 
 if (vimrc_level == "full")
 	"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-	Plug 'Shougo/neocomplete.vim'
+	if has('nvim')
+		Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	else
+		Plug 'Shougo/neocomplete.vim'
+	endif
+	Plug 'Shougo/neco-syntax'
+	"Plug 'thalesmello/webcomplete.vim'
+	Plug 'Shougo/neco-vim'
 	Plug 'eagletmt/neco-ghc'
 	Plug 'eagletmt/ghcmod-vim'
 endif
@@ -131,6 +138,7 @@ command CsvT exec CsvTable()
 "Enable auto-complete for haskell in YCM
 "let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
+let g:deoplete#enable_at_startup = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
