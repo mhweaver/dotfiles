@@ -23,10 +23,8 @@ Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-sensible'
 Plug 'majutsushi/tagbar'
 Plug 'fatih/vim-go'
-Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'dodie/vim-disapprove-deep-indentation'
 Plug 'easymotion/vim-easymotion'
 
 if (vimrc_level == "full")
@@ -95,6 +93,11 @@ set splitright
 " If the line is wrapped, this will move it to the next part of the wrapped line rather than the next "real" line
 nnoremap j gj
 nnoremap k gk
+
+" EasyMotion settings
+map <Leader> <Plug>(easymotion-prefix)
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
 
 " Folding
 " Enable folding
