@@ -26,6 +26,7 @@ Plug 'fatih/vim-go'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-expand-region'
 
 if (vimrc_level == "full")
 	"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
