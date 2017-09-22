@@ -1,6 +1,6 @@
 all: install link
 
-link: link-powerline link-tmux link-vim
+link: link-powerline link-tmux link-vim link-git
 
 install: install-powerline install-vim
 
@@ -20,6 +20,9 @@ link-tmux: FORCE
 
 link-vim: FORCE
 	stow vim
+
+link-git:	FORCE
+	stow git
 
 init-submodules:	FORCE
 	git submodule update --init --recursive
