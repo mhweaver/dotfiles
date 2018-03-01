@@ -22,3 +22,5 @@
 	status = auto
 [log]
 	date = local
+[init]
+	templatedir = ~/.git-templates
