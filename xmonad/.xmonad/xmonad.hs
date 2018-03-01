@@ -300,7 +300,7 @@ main = do
 
     lemonbarproc <- spawnPipe $ "hstatus | lemonbar -b -u 3" ++ lemonbarPrefs
     titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
-    spawn                     $ "killall trayer; trayer" ++ trayerPrefs
+    spawn                     $ "sleep 2; killall trayer; trayer" ++ trayerPrefs
 
     xmonad
         $ ewmh
