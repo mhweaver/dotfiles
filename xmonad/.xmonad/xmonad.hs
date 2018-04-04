@@ -106,6 +106,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
 
     -- Resizing
     , ((modm,               xK_h     ), sendMessage Shrink)
+    , ((modm .|. shiftMask, xK_h     ), sendMessage Expand)
     , ((modm,               xK_l     ), sendMessage Expand)
 
     -- Toggle the status bar gap
@@ -300,7 +301,7 @@ main = do
 
     lemonbarproc <- spawnPipe $ "hstatus | lemonbar -b -u 3" ++ lemonbarPrefs
     titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
-    spawn                     $ "sleep 2; killall trayer; trayer" ++ trayerPrefs
+    spawn                     $ "killall trayer; sleep 2 && trayer" ++ trayerPrefs
 
     xmonad
         $ ewmh
