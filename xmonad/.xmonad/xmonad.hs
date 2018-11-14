@@ -321,7 +321,7 @@ main = do
                  clickJustFocuses   = False,
                  borderWidth        = 1,
                  modMask            = mod4Mask,
-                 workspaces         = ["1:main","2:ide","3:term","4:misc","5","6","7","8","9"],
+                 workspaces         = ["1:main","2:term","3:ide","4:db","5:misc","6","7","8","9"],
                  normalBorderColor  = "#555555",
                  focusedBorderColor = "#bb0000",
 
