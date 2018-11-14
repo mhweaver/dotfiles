@@ -1,9 +1,12 @@
 [core]
 	preloadindex = true
 	editor = vim
+	autocrlf = input
 [user]
 	name = "mhweaver"
 	email = "mhweaver@gmail.com"
+[includeIf "gitdir:~/scripts/"]
+	path = ~/.gitconfig-work
 [includeIf "gitdir:~/code/"]
 	path = ~/.gitconfig-work
 [push]
