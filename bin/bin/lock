@@ -40,5 +40,6 @@
 (sleep 1200; pgrep xsecurelock && xset dpms force off) &
 
 # Lock screen displaying this image.
-xsecurelock auth_pam_x11 saver_code &
+#xsecurelock auth_pam_x11 saver_code &
+xsecurelock &
 #(xsecurelock auth_pam_x11 saver_screenshot; rm -f $PNG_FILE) &
