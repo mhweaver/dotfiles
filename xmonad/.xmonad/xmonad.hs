@@ -48,6 +48,8 @@ import XMonad.Layout.MultiToggle           ( Toggle(Toggle)
                                            , mkToggle
                                            , single )
 import XMonad.Layout.MultiToggle.Instances ( StdTransformers(FULL) )
+import XMonad.Layout.TrackFloating         ( trackFloating
+                                           , useTransientFor )
 import XMonad.Util.NamedWindows            ( getName )
 import XMonad.Hooks.UrgencyHook            ( withUrgencyHookC
                                            , BorderUrgencyHook(BorderUrgencyHook)
@@ -167,8 +169,9 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
 
 ------------------------------------------------------------------------
 -- Layouts:
-myLayout = windowNavigation      -- Easy window navigation
-    . subTabbed                  -- Tabbed sublayouts = all kinds of buggy fun
+myLayout = trackFloating
+    . windowNavigation      -- Easy window navigation
+    -- . subTabbed                  -- Tabbed sublayouts = all kinds of buggy fun
     . boringWindows              -- Skip over hidden windows (e.g., hidden subtabs)
     . avoidStruts                -- Don't cover docked windows
     . mkToggle (single FULL)     -- Toggle full screen
@@ -200,8 +203,7 @@ myLayout = windowNavigation      -- Easy window navigation
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = manageDocks
-
+myManageHook =  manageDocks
 ------------------------------------------------------------------------
 -- Event handling
 
