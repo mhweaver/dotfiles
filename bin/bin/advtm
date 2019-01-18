@@ -1,3 +1,3 @@
 #!/bin/bash
 
-abduco -A `uuidgen` /usr/local/bin/dvtm $@
+abduco -A `uuidgen` /usr/local/bin/dvtm -c `uuidgen` $@
