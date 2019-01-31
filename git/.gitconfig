@@ -17,6 +17,7 @@
 	last = cat-file commit HEAD
 	commitv = commit -v
 	dmerge = merge --no-ff
+	up = pull --rebase --autostash --all
 [color]
 	branch = auto
 	diff = auto
