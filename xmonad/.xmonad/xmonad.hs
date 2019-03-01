@@ -39,8 +39,7 @@ import XMonad.Actions.Submap               ( submap )
 import XMonad.Layout.BoringWindows         ( focusDown
                                            , focusUp
                                            , boringWindows )
-import XMonad.Layout.Tabbed                ( simpleTabbed
-                                           , Direction2D(U, D, L, R) )
+import XMonad.Layout.Tabbed                ( Direction2D(U, D, L, R) )
 import XMonad.Hooks.EwmhDesktops           ( ewmhDesktopsEventHook
                                            , fullscreenEventHook
                                            , ewmh )
@@ -177,7 +176,7 @@ myLayout = trackFloating
     . mkToggle (single FULL)     -- Toggle full screen
     . mkToggle (single REFLECTX) -- Toggle flipping the layout
     . Mag.magnifiercz' 1.25
-    $ tiled ||| simpleTabbed ||| Mirror tiled ||| Full
+    $ tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -266,14 +265,12 @@ myTitleLogHook output = do
                   ppLayout color = lemonbarColor color "" . abbreviateLayoutName
                   abbreviateLayoutName = unwords
                                        . abbreviateName
-                                       . removePrefix "tabbed"
                                        . filter allowedInLayoutName
                                        . words
                                        . map toLower
                   abbreviateName [] = []
                   abbreviateName ("reflectx":rest)          = "flipped" : abbreviateName rest
                   abbreviateName ("mirror":"tall":rest)     = "wide"    : abbreviateName rest
-                  abbreviateName ("tabbed":"simplest":rest) = "tabbed"  : abbreviateName rest
                   abbreviateName name = name
                   allowedInLayoutName "magnifier" = False
                   allowedInLayoutName "nomaster"  = False
