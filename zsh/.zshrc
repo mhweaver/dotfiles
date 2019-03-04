@@ -32,6 +32,8 @@ antigen bundle agkozak/zsh-z
 
 antigen bundle mhweaver/zsh-toggle-alias
 
+antigen bundle mafredri/zsh-async
+
 antigen bundle KyleChamberlin/zsh_maven_plugin
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle zsh-users/zsh-completions
