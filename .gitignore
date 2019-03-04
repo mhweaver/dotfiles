@@ -7,3 +7,4 @@ xmonad/.xmonad/*.hi
 xmonad/.xmonad/.stack-work
 xmonad/.xmonad/xmonad-x86_64-linux
 vim/**/plugged
+vim/.config/nvim/.netrwhist
