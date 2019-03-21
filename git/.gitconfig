@@ -37,4 +37,4 @@
 	enabled = true
 	autoupdate = true
 [credential]
-	helper = cache
+	helper = cache --timeout 86400
