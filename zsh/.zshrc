@@ -34,13 +34,20 @@ antigen bundle mhweaver/zsh-toggle-alias
 
 antigen bundle mafredri/zsh-async
 
+antigen bundle jreese/zsh-titles
+
 antigen bundle KyleChamberlin/zsh_maven_plugin
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle zsh-users/zsh-completions
 antigen bundle mhweaver/zsh-abduco-completion
 
 # Load the theme.
-antigen theme agnoster
+#antigen theme agnoster
+antigen theme denysdovhan/spaceship-prompt
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_DIR_TRUNC=4
+SPACESHIP_DIR_TRUNC_REPO=false
+SPACESHIP_DIR_TRUNC_PREFIX='…/'
 
 # Tell Antigen that you're done.
 antigen apply
@@ -60,3 +67,4 @@ alias st='xembed -w st'
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/ARBFUND/mweaver/.sdkman"
 [[ -s "/home/ARBFUND/mweaver/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ARBFUND/mweaver/.sdkman/bin/sdkman-init.sh"
+
