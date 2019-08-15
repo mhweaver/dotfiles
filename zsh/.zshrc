@@ -22,6 +22,9 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10"
 antigen bundle Tarrasch/zsh-command-not-found
 #antigen bundle clvv/fasd
 
+antigen bundle webyneter/docker-aliases.git
+antigen bundle sroze/docker-compose-zsh-plugin
+
 antigen bundle psprint/zsh-cmd-architect
 
 antigen bundle MichaelAquilina/zsh-you-should-use
