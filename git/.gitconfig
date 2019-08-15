@@ -38,3 +38,5 @@
 	autoupdate = true
 [credential]
 	helper = cache --timeout 86400
+[svn]
+	pushmergeinfo = true
