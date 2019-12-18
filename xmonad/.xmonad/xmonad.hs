@@ -296,7 +296,7 @@ myStartupHook = setWMName "LG3D"
 -- Start up xmonad
 main = do
     let lemonbarPrefs = " -U '#000000' -B '#000000' -F '#dddddd' -f 'DejaVu Sans Mono for Powerline:pixelsize=12:bold' -f 'FontAwesome'"
-        trayerPrefs   = " --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 5 --transparent true --tint 0x000000 --height 17"
+        trayerPrefs   = " --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype percent --width 7 --transparent true --tint 0x000000 --height 17"
 
     lemonbarproc <- spawnPipe $ "hstatus | lemonbar -b -u 3" ++ lemonbarPrefs
     titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
