@@ -1,7 +1,6 @@
 [core]
 	preloadindex = true
 	editor = vim
-	autocrlf = input
 [user]
 	name = "mhweaver"
 	email = "mhweaver@gmail.com"
@@ -15,8 +14,6 @@
 	autocorrect = 1
 [alias]
 	last = cat-file commit HEAD
-	commitv = commit -v
-	dmerge = merge --no-ff
 	up = pull --rebase=preserve --autostash --all
 	unstage = reset HEAD --
 [color]
