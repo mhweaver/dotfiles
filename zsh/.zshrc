@@ -39,6 +39,8 @@ antigen bundle mafredri/zsh-async
 
 antigen bundle jreese/zsh-titles
 
+antigen bundle ytakahashi/igit
+
 antigen bundle KyleChamberlin/zsh_maven_plugin
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle zsh-users/zsh-completions
@@ -71,3 +73,8 @@ alias st='xembed -w st'
 export SDKMAN_DIR="/home/ARBFUND/mweaver/.sdkman"
 [[ -s "/home/ARBFUND/mweaver/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ARBFUND/mweaver/.sdkman/bin/sdkman-init.sh"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
