@@ -202,7 +202,11 @@ myLayout = trackFloating
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook =  manageDocks
+myManageHook = composeAll
+  [ className =? "microsoft teams - preview" <&&> appName =? "Microsoft Teams Notification" --> doIgnore
+  , className =? "Microsoft Teams - Preview" <&&> appName =? "Microsoft Teams Notification" --> doIgnore
+  , manageDocks
+  ]
 ------------------------------------------------------------------------
 -- Event handling
 
@@ -301,6 +305,7 @@ main = do
     lemonbarproc <- spawnPipe $ "hstatus | lemonbar -b -u 3" ++ lemonbarPrefs
     titleproc    <- spawnPipe $ "lemonbar" ++ lemonbarPrefs
     spawn                     $ "killall trayer; sleep 2 && trayer" ++ trayerPrefs
+    spawn                     $ "killall nm-applet; sleep 2 && nm-applet"
 
     xmonad
         $ ewmh
