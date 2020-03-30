@@ -207,8 +207,9 @@ myManageHook = manageDocks <+> composeAll
   [ title =? "Microsoft Teams Notification" --> (doIgnore <+> doRaise)
   ]
   where doRaise = do
-            ask >>= \win -> liftX $ withDisplay $ \dpy -> do
-                io $ raiseWindow dpy win
+            win <- ask
+            liftX $
+              withDisplay $ \dsp -> io (raiseWindow dsp win)
             mempty
 ------------------------------------------------------------------------
 -- Event handling
