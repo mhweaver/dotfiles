@@ -204,11 +204,11 @@ myLayout = trackFloating
 -- 'className' and 'resource' are used below.
 --
 myManageHook = manageDocks <+> composeAll
-  [ title =? "Microsoft Teams Notification" --> (doIgnore <+> setDocksMask)
+  [ title =? "Microsoft Teams Notification" --> (doIgnore <+> doRaise)
   ]
-  where setDocksMask = do
+  where doRaise = do
             ask >>= \win -> liftX $ withDisplay $ \dpy -> do
-                io $ selectInput dpy win (propertyChangeMask .|. structureNotifyMask)
+                io $ raiseWindow dpy win
             mempty
 ------------------------------------------------------------------------
 -- Event handling
