@@ -17,6 +17,7 @@ import XMonad.Hooks.DynamicLog             ( dynamicLogWithPP
 import System.Exit                         ( exitSuccess )
 import Data.Char                           ( toLower )
 import Data.Maybe                          ( fromMaybe )
+import Data.Monoid                         ( mempty )
 import XMonad.Layout.Reflect               ( REFLECTX(REFLECTX) )
 import XMonad.Layout.LayoutCombinators     ( (|||) )
 import XMonad.Hooks.ManageDocks            ( ToggleStruts(ToggleStruts)
@@ -202,11 +203,13 @@ myLayout = trackFloating
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-  [ className =? "microsoft teams - preview" <&&> appName =? "Microsoft Teams Notification" --> doIgnore
-  , className =? "Microsoft Teams - Preview" <&&> appName =? "Microsoft Teams Notification" --> doIgnore
-  , manageDocks
+myManageHook = manageDocks <+> composeAll
+  [ title =? "Microsoft Teams Notification" --> (doIgnore <+> setDocksMask)
   ]
+  where setDocksMask = do
+            ask >>= \win -> liftX $ withDisplay $ \dpy -> do
+                io $ selectInput dpy win (propertyChangeMask .|. structureNotifyMask)
+            mempty
 ------------------------------------------------------------------------
 -- Event handling
 
