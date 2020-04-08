@@ -14,3 +14,6 @@
 [submodule "xmonad/.xmonad/xmonad-contrib"]
 	path = xmonad/.xmonad/xmonad-contrib
 	url = https://github.com/xmonad/xmonad-contrib
+[submodule "git-credential-1password"]
+	path = git-credential-1password
+	url = https://github.com/acahir/git-credential-1password.git
