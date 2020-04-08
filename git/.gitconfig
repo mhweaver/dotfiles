@@ -34,6 +34,7 @@
 	enabled = true
 	autoupdate = true
 [credential]
+	helper = 1password -t -q
 	helper = cache --timeout 86400
 [svn]
 	pushmergeinfo = true
