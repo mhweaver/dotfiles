@@ -1,3 +1,17 @@
+" Install vim-plug (vim)
+if !has('nvim') && empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync
+endif
+
+" Install vim-plug (neovim)
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) && has('nvim')
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync
+endif
+
 if !exists("vimrc_level")
 	let vimrc_level="full"
 endif
@@ -43,7 +57,6 @@ if (vimrc_level == "full")
 endif
 
 call plug#end()
-
 
 "General code formating options
 set linebreak

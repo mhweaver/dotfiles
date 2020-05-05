@@ -1,0 +1,22 @@
+---
+image: ubuntu:bionic
+
+stages:
+  - test
+
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq -y git
+  - cp -r $CI_PROJECT_DIR $HOME/dotfiles
+  - cd $HOME/dotfiles
+
+test zsh:
+  stage: test
+  only:
+    changes:
+      - zsh/*
+  script:
+    - apt-get install -qq -y zsh
+    - mkdir -p $HOME/repos
+    - git clone https://github.com/zsh-users/antigen.git $HOME/repos/antigen
+    - zsh
