@@ -41,6 +41,11 @@ antigen bundle jreese/zsh-titles
 
 antigen bundle ytakahashi/igit
 
+# the kubectl plugin looks for the kubectl command in order to add completions, so alias it before loading
+alias kubectl=microk8s.kubectl
+#antigen bundle mattbangert/kubectl-zsh-plugin
+antigen bundle Dbz/kube-aliases
+
 antigen bundle KyleChamberlin/zsh_maven_plugin
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle zsh-users/zsh-completions
