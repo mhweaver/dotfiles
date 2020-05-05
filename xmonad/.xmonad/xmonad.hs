@@ -205,6 +205,7 @@ myLayout = trackFloating
 --
 myManageHook = manageDocks <+> composeAll
   [ title =? "Microsoft Teams Notification" --> (doIgnore <+> doRaise)
+  , (title =? "" <&&> className =? "zoom") --> (doIgnore <+> doRaise)
   ]
   where doRaise = do
             win <- ask
