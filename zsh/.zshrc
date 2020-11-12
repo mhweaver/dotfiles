@@ -41,8 +41,6 @@ antigen bundle jreese/zsh-titles
 
 antigen bundle ytakahashi/igit
 
-# the kubectl plugin looks for the kubectl command in order to add completions, so alias it before loading
-alias kubectl=microk8s.kubectl
 #antigen bundle mattbangert/kubectl-zsh-plugin
 antigen bundle Dbz/kube-aliases
 
@@ -73,13 +71,24 @@ alias v='f -e vim'
 alias gdiff='git diff --word-diff'
 alias surf='xembed -e surf'
 alias st='xembed -w st'
-#
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/ARBFUND/mweaver/.sdkman"
-[[ -s "/home/ARBFUND/mweaver/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ARBFUND/mweaver/.sdkman/bin/sdkman-init.sh"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/mweaver/.sdkman"
+[[ -s "/Users/mweaver/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/mweaver/.sdkman/bin/sdkman-init.sh"
+export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
+export PATH="/usr/local/opt/arm-gcc-bin@8/bin:$PATH"
+
+if type brew &>/dev/null; then
+	  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+	    autoload -Uz compinit
+		  compinit
+fi
+

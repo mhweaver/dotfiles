@@ -1,6 +1,7 @@
 [core]
 	preloadindex = true
-	editor = vim
+	editor = nvim
+	excludesfile = /Users/mweaver/.gitignore_global
 [user]
 	name = "mhweaver"
 	email = "mhweaver@gmail.com"
@@ -38,3 +39,9 @@
 	helper = cache --timeout 86400
 [svn]
 	pushmergeinfo = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
