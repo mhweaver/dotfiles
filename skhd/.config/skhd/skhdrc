@@ -19,7 +19,8 @@ ctrl + alt + cmd - j : yabai -m window --swap stack.next
 ctrl + alt + cmd - k : yabai -m window --swap stack.prev
 
 ctrl + alt + cmd - s : yabai -m window --stack next
-ctrl + alt + cmd + shift - s : yabai -m window --warp stack.prev
+# Unstack by toggling float twice. Hacky, but it works
+ctrl + alt + cmd + shift - s : yabai -m window --toggle float; yabai -m window --toggle float
 
 # toggle layout between stack and bsp
 ctrl + alt + cmd - l : (yabai -m query --spaces --space | jq -e 'select(.type == "bsp").index') && yabai -m space --layout stack || yabai -m space --layout bsp
