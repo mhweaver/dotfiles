@@ -5,7 +5,6 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
-antigen bundle heroku
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
@@ -19,13 +18,10 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10"
 
-antigen bundle Tarrasch/zsh-command-not-found
 #antigen bundle clvv/fasd
 
 antigen bundle webyneter/docker-aliases.git
 antigen bundle sroze/docker-compose-zsh-plugin
-
-antigen bundle psprint/zsh-cmd-architect
 
 antigen bundle MichaelAquilina/zsh-you-should-use
 
@@ -38,8 +34,6 @@ antigen bundle mhweaver/zsh-toggle-alias
 antigen bundle mafredri/zsh-async
 
 antigen bundle jreese/zsh-titles
-
-antigen bundle ytakahashi/igit
 
 #antigen bundle mattbangert/kubectl-zsh-plugin
 antigen bundle Dbz/kube-aliases
@@ -79,11 +73,16 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$HOME/bin:$PATH"
 
+export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
+export PATH="/usr/local/opt/arm-gcc-bin@8/bin:$PATH"
+
+export CLOUDSDK_PYTHON="$(brew --prefix)/opt/python@3.8/libexec/bin/python"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/mweaver/.sdkman"
 [[ -s "/Users/mweaver/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/mweaver/.sdkman/bin/sdkman-init.sh"
-export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
-export PATH="/usr/local/opt/arm-gcc-bin@8/bin:$PATH"
 
 if type brew &>/dev/null; then
 	  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -92,3 +91,4 @@ if type brew &>/dev/null; then
 		  compinit
 fi
 
+export PATH="/usr/local/sbin:$PATH"
