@@ -5,8 +5,8 @@ ctrl + alt + cmd - up : yabai -m window --focus north
 ctrl + alt + cmd - down : yabai -m window --focus south
 
 # stack focus
-ctrl + alt + cmd - j : yabai -m window --focus stack.next
-ctrl + alt + cmd - k : yabai -m window --focus stack.prev
+ctrl + alt + cmd - j : yabai -m window --focus stack.next || yabai -m window --focus next || (yabai -m window --focus first && yabai -m window --focus stack.first)
+ctrl + alt + cmd - k : yabai -m window --focus stack.prev || yabai -m window --focus prev || (yabai -m window --focus last && yabai -m window --focus stack.last)
 
 # swap managed window
 ctrl + alt + cmd + shift - left : yabai -m window --swap north
@@ -15,8 +15,8 @@ ctrl + alt + cmd + shift - up : yabai -m window --swap north
 ctrl + alt + cmd + shift - down : yabai -m window --swap south
 
 # stack swap
-ctrl + alt + cmd - j : yabai -m window --swap stack.next
-ctrl + alt + cmd - k : yabai -m window --swap stack.prev
+ctrl + alt + cmd - j : yabai -m window --swap stack.next || yabai -m window --swap next
+ctrl + alt + cmd - k : yabai -m window --swap stack.prev || yabai -m window --swap prev
 
 ctrl + alt + cmd - s : yabai -m window --stack next
 # Unstack by toggling float twice. Hacky, but it works
