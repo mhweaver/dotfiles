@@ -42,3 +42,32 @@ ctrl + alt + cmd + shift - f : yabai -m window --toggle native-fullscreen
 ctrl + alt + cmd - t : yabai -m window --toggle float;\
                        yabai -m window --grid 4:4:1:1:2:2
 
+# ctrl + alt + cmd - 1 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space a --display $index; yabai -m space --focus a
+# ctrl + alt + cmd - 2 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space b --display $index; yabai -m space --focus b
+# ctrl + alt + cmd - 3 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space c --display $index; yabai -m space --focus c
+# ctrl + alt + cmd - 4 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space d --display $index; yabai -m space --focus d
+# ctrl + alt + cmd - 5 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space e --display $index; yabai -m space --focus e
+# ctrl + alt + cmd - 6 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space f --display $index; yabai -m space --focus f
+# ctrl + alt + cmd - 7 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space g --display $index; yabai -m space --focus g
+# ctrl + alt + cmd - 8 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space h --display $index; yabai -m space --focus h
+# ctrl + alt + cmd - 9 : index=$(yabai -m query --displays --display | jq '.index'); yabai -m space i --display $index; yabai -m space --focus i
+
+ctrl + alt + cmd - 1 : /Users/mweaver/.local/bin/yabai-summon-space a
+ctrl + alt + cmd - 2 : /Users/mweaver/.local/bin/yabai-summon-space b
+ctrl + alt + cmd - 3 : /Users/mweaver/.local/bin/yabai-summon-space c
+ctrl + alt + cmd - 4 : /Users/mweaver/.local/bin/yabai-summon-space d
+ctrl + alt + cmd - 5 : /Users/mweaver/.local/bin/yabai-summon-space e
+ctrl + alt + cmd - 6 : /Users/mweaver/.local/bin/yabai-summon-space f
+ctrl + alt + cmd - 7 : /Users/mweaver/.local/bin/yabai-summon-space g
+ctrl + alt + cmd - 8 : /Users/mweaver/.local/bin/yabai-summon-space h
+ctrl + alt + cmd - 9 : /Users/mweaver/.local/bin/yabai-summon-space i
+
+ctrl + alt + cmd + shift - 1 : yabai -m window --space a
+ctrl + alt + cmd + shift - 2 : yabai -m window --space b
+ctrl + alt + cmd + shift - 3 : yabai -m window --space c
+ctrl + alt + cmd + shift - 4 : yabai -m window --space d
+ctrl + alt + cmd + shift - 5 : yabai -m window --space e
+ctrl + alt + cmd + shift - 6 : yabai -m window --space f
+ctrl + alt + cmd + shift - 7 : yabai -m window --space g
+ctrl + alt + cmd + shift - 8 : yabai -m window --space h
+ctrl + alt + cmd + shift - 9 : yabai -m window --space i

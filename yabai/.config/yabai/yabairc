@@ -3,6 +3,15 @@
 #yabai -m space 2 --label web
 #yabai -m space 3 --label ide
 #yabai -m space 4 --label cli
+yabai -m space 1 --label a
+yabai -m space 2 --label b
+yabai -m space 3 --label c
+yabai -m space 4 --label d
+yabai -m space 5 --label e
+yabai -m space 6 --label f
+yabai -m space 7 --label g
+yabai -m space 8 --label h
+yabai -m space 9 --label i
 
 # global settings
 yabai -m config mouse_follows_focus          off
@@ -42,5 +51,7 @@ yabai -m rule --add app="^JetBrains Toolbox$" manage="off"
 yabai -m rule --add app="^Flux$" manage="off"
 yabai -m rule --add app="^Firefox$" title="^Opening .*$" manage="off"
 yabai -m rule --add app="^Microsoft Outlook$" title="^[0-9]+ Reminder$" manage="off"
+yabai -m rule --add app="^Microsoft Teams$" title="^Microsoft Teams Notification$" manage="off"
+#yabai -m rule --add app="^IntelliJ IDEA.*$" title="^(Project Structure|Import Module |Preferences|Plugin Updates)$" manage="off"
 
 echo "yabai configuration loaded.."

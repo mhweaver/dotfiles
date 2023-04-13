@@ -1,3 +1,5 @@
+set shell=/bin/zsh
+
 " Install vim-plug (vim)
 if !has('nvim') && empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -36,7 +38,7 @@ Plug 'mhinz/vim-signify'
 Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-sensible'
 Plug 'majutsushi/tagbar'
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'easymotion/vim-easymotion'
@@ -45,7 +47,8 @@ Plug 'terryma/vim-expand-region'
 if (vimrc_level == "full")
 	"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 	if has('nvim')
-		Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	else
 		Plug 'Shougo/neocomplete.vim'
 	endif

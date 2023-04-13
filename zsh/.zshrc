@@ -1,3 +1,4 @@
+. /usr/local/opt/asdf/libexec/asdf.sh
 source $HOME/repos/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -6,7 +7,7 @@ antigen use oh-my-zsh
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle pip
-antigen bundle lein
+# antigen bundle lein
 antigen bundle command-not-found
 #antigen bundle globalias
 antigen bundle common-aliases
@@ -21,7 +22,7 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=10"
 #antigen bundle clvv/fasd
 
 antigen bundle webyneter/docker-aliases.git
-antigen bundle sroze/docker-compose-zsh-plugin
+# antigen bundle sroze/docker-compose-zsh-plugin
 
 antigen bundle MichaelAquilina/zsh-you-should-use
 
@@ -42,14 +43,16 @@ antigen bundle KyleChamberlin/zsh_maven_plugin
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle zsh-users/zsh-completions
 antigen bundle mhweaver/zsh-abduco-completion
+antigen bundle jeffreytse/zsh-vi-mode
 
 # Load the theme.
 #antigen theme agnoster
-antigen theme denysdovhan/spaceship-prompt
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_DIR_TRUNC=4
-SPACESHIP_DIR_TRUNC_REPO=false
-SPACESHIP_DIR_TRUNC_PREFIX='…/'
+#antigen theme denysdovhan/spaceship-prompt
+#SPACESHIP_TIME_SHOW=true
+#SPACESHIP_DIR_TRUNC=4
+#SPACESHIP_DIR_TRUNC_REPO=false
+#SPACESHIP_DIR_TRUNC_PREFIX='…/'
+eval "$(starship init zsh)"
 
 # Tell Antigen that you're done.
 antigen apply
@@ -72,6 +75,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.fig/bin:$PATH"
 
 export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
 export PATH="/usr/local/opt/arm-gcc-bin@8/bin:$PATH"
@@ -79,6 +84,9 @@ export PATH="/usr/local/opt/arm-gcc-bin@8/bin:$PATH"
 export CLOUDSDK_PYTHON="$(brew --prefix)/opt/python@3.8/libexec/bin/python"
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/mweaver/.sdkman"
