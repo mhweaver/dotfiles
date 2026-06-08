@@ -11,8 +11,9 @@
 	path = ~/.gitconfig-work
 [push]
 	default = simple
+	autoSetupRemote = true
 [help]
-	autocorrect = 1
+	autocorrect = prompt
 [alias]
 	last = cat-file commit HEAD
 	up = pull --rebase=merges --autostash --all
@@ -39,9 +40,24 @@
 ;	helper = cache --timeout 86400
 [svn]
 	pushmergeinfo = true
+[diff]
+	algorithm = histogram
+	renames = true
+	colorMoved = plain
+	mnemonicPrefix = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	all = true
+[commit]
+	verbose = true

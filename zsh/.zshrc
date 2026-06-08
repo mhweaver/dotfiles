@@ -1,4 +1,4 @@
-. /usr/local/opt/asdf/libexec/asdf.sh
+#. /usr/local/opt/asdf/libexec/asdf.sh
 source $HOME/repos/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -6,7 +6,7 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
-antigen bundle pip
+# antigen bundle pip
 # antigen bundle lein
 antigen bundle command-not-found
 #antigen bundle globalias
@@ -32,12 +32,12 @@ antigen bundle agkozak/zsh-z
 
 antigen bundle mhweaver/zsh-toggle-alias
 
-antigen bundle mafredri/zsh-async
+antigen bundle mafredri/zsh-async@main
 
 antigen bundle jreese/zsh-titles
 
 #antigen bundle mattbangert/kubectl-zsh-plugin
-antigen bundle Dbz/kube-aliases
+#antigen bundle Dbz/kube-aliases
 
 antigen bundle KyleChamberlin/zsh_maven_plugin
 antigen bundle lukechilds/zsh-better-npm-completion
@@ -60,7 +60,7 @@ antigen apply
 export EDITOR=vim
 export DVTM_PAGER='less -R'
 export DVTM_EDITOR='vis'
-export SHELL=/usr/bin/zsh
+export SHELL=/bin/zsh
 export LESS='--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4'
 
 alias f='fasd -f'
@@ -82,11 +82,16 @@ export PATH="/usr/local/opt/avr-gcc@8/bin:$PATH"
 export PATH="/usr/local/opt/arm-gcc-bin@8/bin:$PATH"
 
 export CLOUDSDK_PYTHON="$(brew --prefix)/opt/python@3.8/libexec/bin/python"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+# source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+# source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+# complete -o nospace -C /usr/local/bin/terraform terraform
+
+# Shim pyenv in to manage python versions
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/mweaver/.sdkman"
@@ -100,3 +105,15 @@ if type brew &>/dev/null; then
 fi
 
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$PATH:/Users/mweaver/Library/Python/3.9/bin"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/mweaver/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# bun completions
+[ -s "/Users/mweaver/.bun/_bun" ] && source "/Users/mweaver/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
